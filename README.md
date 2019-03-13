@@ -1,3 +1,3 @@
 # Dotfiles
 
-config files
+![Screenshot_of_spacemacs]Screenshot.png

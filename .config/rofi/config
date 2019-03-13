@@ -1,0 +1,7 @@
+rofi.combi-modi:  	run,ssh
+rofi.theme:		~/.config/rofi/themes/solarized-darker
+rofi.font:		GohuFont Nerd Font 10
+rofi.modi:		drun,window,run
+#rofi.show-icons:	true
+rofi.sidebar-mode:	true
+
