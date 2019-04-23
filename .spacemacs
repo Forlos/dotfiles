@@ -31,7 +31,6 @@ values."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
-     lua
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
@@ -49,7 +48,7 @@ values."
      python
      org
      (shell :variables
-            shell-default-height 30
+            shell-default-height 40
             shell-default-position 'bottom)
      ;; spell-checking
      asm
@@ -64,8 +63,8 @@ values."
      html
      sql
      syntax-checking
-     pdf-tools
-     ;; lsp
+     lua
+     lsp
      ;; xkcd
      ;; version-control
      )
@@ -75,22 +74,13 @@ values."
    ;; configuration in `dotspacemacs/user-config'.
    dotspacemacs-additional-packages
    '(
-     ;;aggressive-indent
+     ;; aggressive-indent
      all-the-icons
      base16-theme
      beacon
      dumb-jump
      doom-themes
-     ;;indent-guide
-     lsp-mode
-     lsp-rust
-     lsp-ui
-     company-lsp
-     flycheck-rust
-     ;; eglot
-     ;; company-tabnine
-     minimap
-     multiple-cursors
+     ;; indent-guide
      ;; parrot
      rainbow-delimiters
      sublimity
@@ -368,6 +358,8 @@ before packages are loaded. If you are unsure, you should try in setting them in
   ;; (use-package lsp-ui :commands lsp-ui-mode)
   ;; (use-package company-lsp :commands company-lsp)
 
+  (setq omnisharp-server-executable-path "/home/forlos/bin/omnisharp-linux-x64/run")
+
   (setq pdf-view-incompatible-modes 'linum-mode)
 
   (setq theming-modifications
@@ -400,76 +392,21 @@ you should place your code here."
 
   (use-package toml-mode)
 
-  ;; (use-package rust-mode
-  ;;   :hook (rust-mode . lsp))
+  (setq lsp-enable-completion-at-point t)
+  (setq lsp-ui-remap-xref-keybindings 1)
 
-  ;; (use-package flycheck-rust
-  ;;   :config (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
+  (setq rust-backend "lsp")
+  (add-hook 'rust-mode-hook #'lsp)
+  (nconc rust-mode-hook
+         (list
+          (lambda ()
+            (add-to-list 'company-backends 'company-lsp))))
 
+  (defconst jv-lsp-packages
+    '(lsp-mode
+      lsp-ui))
 
-  ;; (add-hook 'rust-mode-hook #'racer-mode)
-  ;; (add-hook 'rust-mode-hook #'lsp)
-  ;; (add-hook 'racer-mode-hook #'eldoc-mode)
-
-  ;; (setq lsp-rust-rls-command '("rustup" "run" "nightly" "rls"))
-
-  ;; (add-hook 'rust-mode-hook #'lsp-rust-enable)
-  ;; (add-hook 'rust-mode-hook #'flycheck-mode)
-
-  ;; (setq lsp-enable-completion-at-point t)
-
-  ;; (require 'company-lsp)
-  ;; (push 'company-lsp company-backends)
-  ;; (setq company-lsp-async t)
-  ;; (setq company-lsp-enable-recompletion t)
-
-  ;; (use-package lsp-mode
-  ;;   :commands lsp
-  ;;   :ensure t
-  ;;   :config
-  ;;   (setq lsp-print-io t)
-  ;;   (setq lsp-rust-rls-command '("rls"))
-  ;;   (unless (fboundp 'lsp-rust-enable)
-  ;;     (defun lsp-rust-enable ()
-  ;;       (require 'lsp-clients)
-  ;;       (when (boundp 'lsp-rust-rls-command)
-  ;;         (lsp-register-client
-  ;;          :major-modes '(rust-mode)
-  ;;          (lsp))))))
-
-  ;; (setq rust-backend "lsp")
-  ;; (add-hook 'rust-mode-hook #'lsp-rust-enable)
-  ;; (nconc rust-mode-hook
-  ;;        (list
-  ;;         (lambda ()
-  ;;           (add-to-list 'company-backends 'company-lsp))))
-
-  ;; (defconst jv-lsp-packages
-  ;;   '(lsp-mode
-  ;;     lsp-ui))
-
-  ;; (defun jv-lsp/post-init-lsp-mode ()
-  ;;   (defun jv-lsp/setup-lsp-mode ()
-  ;;     (setq lsp-remap-xref-keybindings nil)
-  ;;     (setq lsp-navigation 'both))
-
-  ;;   (spacemacs|diminish lsp-mode " Ⓛ" " L")
-
-  ;;   (add-hook 'c-mode-hook 'jv-lsp/setup-lsp-mode)
-  ;;   (add-hook 'c++-mode-hook 'jv-lsp/setup-lsp-mode)
-  ;;   (add-hook 'rust-mode-hook 'jv-lsp/setup-lsp-mode))
-
-  ;; (defun jv-lsp/post-init-lsp-ui ()
-  ;;   (defun jv-lsp/setup-lsp-ui-mode ()
-  ;;     (setq lsp-ui-doc-enable t)
-  ;;     (setq lsp-ui-doc-include-signature nil)
-  ;;     (setq lsp-ui-sideline-enable nil)
-  ;;     (setq lsp-ui-sideline-show-symbol nil)
-  ;;     (setq lsp-ui-sideline-ignore-dupliate nil))
-
-  ;;   (add-hook 'c-mode-hook 'jv-lsp/setup-lsp-ui-mode)
-  ;;   (add-hook 'c++-mode-hook 'jv-lsp/setup-lsp-ui-mode)
-  ;;   (add-hook 'rust-mode-hook 'jv-lsp/setup-lsp-ui-mode))
+  (spacemacs|diminish lsp-mode " Ⓛ" " L")
 
   (require 'multiple-cursors)
   ;; NeoTree theme to show icons
@@ -485,7 +422,7 @@ you should place your code here."
   (load-theme 'doom-city-lights t)
 
   ;; Enable custom neotree theme (all-the-icons must be installed!)
-  ;; (doom-themes-neotree-config)
+  (doom-themes-neotree-config)
 
   ;; Corrects (and improves) org-mode's native fontification.
   (doom-themes-org-config)
@@ -570,7 +507,7 @@ you should place your code here."
  '(magit-diff-use-overlays nil)
  '(package-selected-packages
    (quote
-    (company-tabnine eglot flymake jsonrpc transient lv company-racer deferred company-lsp lsp-ui lsp-rust lsp-mode ht tabbar pdf-tools tablist base16-theme lua-mode undo-tree memory-usage sublimity toml-mode sql-indent racer flycheck-rust cargo rust-mode parrot doom-city-lights-theme doom-themes minimap adaptive-wrap tern beacon seq all-the-icons memoize treepy graphql c-eldoc disaster company-c-headers cmake-mode clang-format zenburn-theme zen-and-art-theme white-sand-theme web-mode web-beautify underwater-theme ujelly-theme twilight-theme twilight-bright-theme twilight-anti-bright-theme toxi-theme tao-theme tangotango-theme tango-plus-theme tango-2-theme tagedit sunny-day-theme sublime-themes subatomic256-theme subatomic-theme spacegray-theme soothe-theme solarized-theme soft-stone-theme soft-morning-theme soft-charcoal-theme smyx-theme smeargle slim-mode seti-theme scss-mode sass-mode reverse-theme rebecca-theme rainbow-mode rainbow-identifiers railscasts-theme purple-haze-theme pug-mode professional-theme planet-theme phoenix-dark-pink-theme phoenix-dark-mono-theme orgit organic-green-theme org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download omtose-phellack-theme oldlace-theme occidental-theme obsidian-theme noctilux-theme nasm-mode naquadah-theme mustang-theme monokai-theme monochrome-theme molokai-theme moe-theme minimal-theme material-theme majapahit-theme magit-gitflow madhat2r-theme lush-theme livid-mode skewer-mode simple-httpd light-soap-theme less-css-mode json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc jbeans-theme jazz-theme ir-black-theme inkpot-theme htmlize heroku-theme hemisu-theme helm-gitignore helm-css-scss hc-zenburn-theme haml-mode gruvbox-theme gruber-darker-theme grandshell-theme gotham-theme gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gandalf-theme flatui-theme flatland-theme farmhouse-theme exotica-theme evil-magit magit magit-popup git-commit ghub let-alist with-editor espresso-theme emmet-mode dracula-theme django-theme darktooth-theme autothemer darkokai-theme darkmine-theme darkburn-theme dakrone-theme cyberpunk-theme company-web web-completion-data company-tern company-emacs-eclim eclim color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized color-identifiers-mode coffee-mode clues-theme cherry-blossom-theme busybee-theme bubbleberry-theme birds-of-paradise-plus-theme badwolf-theme apropospriate-theme anti-zenburn-theme ample-zen-theme ample-theme alect-themes afternoon-theme company-quickhelp yapfify xterm-color shell-pop pyvenv pytest pyenv-mode py-isort pip-requirements multi-term mmm-mode markdown-toc markdown-mode live-py-mode hy-mode dash-functional helm-pydoc helm-company helm-c-yasnippet gh-md fuzzy flycheck-pos-tip pos-tip flycheck eshell-z eshell-prompt-extras esh-help cython-mode company-statistics company-anaconda company auto-yasnippet yasnippet anaconda-mode pythonic ac-ispell auto-complete spinner evil-visualstar evil-visual-mark-mode evil-tutor evil-surround evil-mc evil-matchit evil-lisp-state evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline smartparens restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint indent-guide hydra hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-unimpaired evil-search-highlight-persist evil-numbers evil-nerd-commenter evil goto-chg eval-sexp-fu highlight elisp-slime-nav dumb-jump f dash s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed aggressive-indent ace-window ace-link ace-jump-helm-line helm avy helm-core popup async)))
+    (omnisharp csharp-mode company-tabnine eglot flymake jsonrpc transient lv company-racer deferred company-lsp lsp-ui lsp-rust lsp-mode ht tabbar pdf-tools tablist base16-theme lua-mode undo-tree memory-usage sublimity toml-mode sql-indent racer flycheck-rust cargo rust-mode parrot doom-city-lights-theme doom-themes minimap adaptive-wrap tern beacon seq all-the-icons memoize treepy graphql c-eldoc disaster company-c-headers cmake-mode clang-format zenburn-theme zen-and-art-theme white-sand-theme web-mode web-beautify underwater-theme ujelly-theme twilight-theme twilight-bright-theme twilight-anti-bright-theme toxi-theme tao-theme tangotango-theme tango-plus-theme tango-2-theme tagedit sunny-day-theme sublime-themes subatomic256-theme subatomic-theme spacegray-theme soothe-theme solarized-theme soft-stone-theme soft-morning-theme soft-charcoal-theme smyx-theme smeargle slim-mode seti-theme scss-mode sass-mode reverse-theme rebecca-theme rainbow-mode rainbow-identifiers railscasts-theme purple-haze-theme pug-mode professional-theme planet-theme phoenix-dark-pink-theme phoenix-dark-mono-theme orgit organic-green-theme org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download omtose-phellack-theme oldlace-theme occidental-theme obsidian-theme noctilux-theme nasm-mode naquadah-theme mustang-theme monokai-theme monochrome-theme molokai-theme moe-theme minimal-theme material-theme majapahit-theme magit-gitflow madhat2r-theme lush-theme livid-mode skewer-mode simple-httpd light-soap-theme less-css-mode json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc jbeans-theme jazz-theme ir-black-theme inkpot-theme htmlize heroku-theme hemisu-theme helm-gitignore helm-css-scss hc-zenburn-theme haml-mode gruvbox-theme gruber-darker-theme grandshell-theme gotham-theme gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gandalf-theme flatui-theme flatland-theme farmhouse-theme exotica-theme evil-magit magit magit-popup git-commit ghub let-alist with-editor espresso-theme emmet-mode dracula-theme django-theme darktooth-theme autothemer darkokai-theme darkmine-theme darkburn-theme dakrone-theme cyberpunk-theme company-web web-completion-data company-tern company-emacs-eclim eclim color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized color-identifiers-mode coffee-mode clues-theme cherry-blossom-theme busybee-theme bubbleberry-theme birds-of-paradise-plus-theme badwolf-theme apropospriate-theme anti-zenburn-theme ample-zen-theme ample-theme alect-themes afternoon-theme company-quickhelp yapfify xterm-color shell-pop pyvenv pytest pyenv-mode py-isort pip-requirements multi-term mmm-mode markdown-toc markdown-mode live-py-mode hy-mode dash-functional helm-pydoc helm-company helm-c-yasnippet gh-md fuzzy flycheck-pos-tip pos-tip flycheck eshell-z eshell-prompt-extras esh-help cython-mode company-statistics company-anaconda company auto-yasnippet yasnippet anaconda-mode pythonic ac-ispell auto-complete spinner evil-visualstar evil-visual-mark-mode evil-tutor evil-surround evil-mc evil-matchit evil-lisp-state evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline smartparens restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint indent-guide hydra hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-unimpaired evil-search-highlight-persist evil-numbers evil-nerd-commenter evil goto-chg eval-sexp-fu highlight elisp-slime-nav dumb-jump f dash s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed aggressive-indent ace-window ace-link ace-jump-helm-line helm avy helm-core popup async)))
  '(pos-tip-background-color "#FFFACE")
  '(pos-tip-foreground-color "#272822")
  '(vc-annotate-background nil)
