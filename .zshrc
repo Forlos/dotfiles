@@ -6,10 +6,14 @@
 
 export ZSH="${HOME}/.oh-my-zsh"
 export TERM="xterm-256color"
-export PATH="${PATH}:${HOME}/.gem/ruby/2.5.0/bin/:${HOME}/.local/bin/:${HOME}/.scripts/:${HOME}/.cargo/bin"
+export PATH="${PATH}:${HOME}/.gem/ruby/2.5.0/bin/:${HOME}/.local/bin/:${HOME}/.scripts/:${HOME}/.cargo/bin:${HOME}/go/bin"
 export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
+export GO_PATH=${HOME}/go
 
 alias ls="colorls"
+alias rm="trash"
+alias hexd="hexyl -n 256"
+alias grep="rg"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -78,8 +82,18 @@ plugins=(
   colorize
   command-not-found
   python
-  theme
-  zsh-reload
+  mvn
+  ripgrep
+  cargo
+  catimg
+  cp
+  docker
+  base64
+  extract
+  httpie
+  lol
+  sudo
+  zsh_reload
   zsh-autosuggestions
   zsh-syntax-highlighting
 )
@@ -90,7 +104,7 @@ source $ZSH/oh-my-zsh.sh
 # Show OS info when opening a new terminal
 
 #neofetch
-bat ~/yurishort.txt | figlet -t -f ~/.config/figlet/stampatello
+#bat ~/yurishort.txt | figlet -t -f ~/.config/figlet/stampatello
 
 # User configuration
 
@@ -194,6 +208,22 @@ POWERLEVEL9K_DIR_HOME_FOREGROUND="red"
 POWERLEVEL9K_DIR_HOME_SUBFOLDER_FOREGROUND="white"
 POWERLEVEL9K_DIR_DEFAULT_FOREGROUND="white"
 
+#POWERLEVEL9K_CONTEXT_REMOTE
+POWERLEVEL9K_CONTEXT_REMOTE_BACKGROUND="white"
+POWERLEVEL9K_CONTEXT_REMOTE_FOREGROUND="black"
+
 # Prompt elements
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(os_icon context dir root_indicator vcs dir_writable)
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status command_execution_time background_jobs ssh time ram ip)
+
+# Prompts
+if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
+  POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(os_icon ssh context dir root_indicator vcs dir_writable)
+else
+  POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(os_icon context dir root_indicator vcs dir_writable)
+fi
+
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status command_execution_time background_jobs time ram ip)
+
+catimg ~/.wallpapers/TOUHOUAYAYA.png
+
+
+source /home/forlos/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
