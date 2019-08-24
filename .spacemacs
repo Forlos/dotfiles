@@ -1,7 +1,6 @@
 ;; -*- mode: emacs-lisp -*-
 ;; This file is loaded by Spacemacs at startup.
 ;; It must be stored in your home directory.
-
 (defun dotspacemacs/layers ()
   "Configuration Layers declaration.
 You should not put any user code in this function besides modifying the variable
@@ -60,8 +59,7 @@ values."
      docker
 
      ;; Programming
-     (c-c++ :variables c-c++-enable-clang-support t)PL
-
+     (c-c++ :variables c-c++-enable-clang-support t)
      (rust)
      (go :variables
          go-use-golangci-lint t
@@ -111,7 +109,6 @@ values."
      magit-todos
      rainbow-delimiters
      sublimity
-     spaceline-all-the-icons
      wttrin
      )
 ; A list of packages that cannot be updated.
