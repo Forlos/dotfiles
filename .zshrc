@@ -88,10 +88,10 @@ plugins=(
   catimg
   cp
   docker
-  base64
+  encode64
   extract
   httpie
-  lol
+#  lol
   sudo
   zsh_reload
   zsh-autosuggestions
