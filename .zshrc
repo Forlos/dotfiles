@@ -14,6 +14,7 @@ alias ls="colorls"
 alias rm="trash"
 alias hexd="hexyl -n 256"
 alias grep="rg"
+alias cp="rsync -ah --progress"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
