@@ -74,8 +74,11 @@ values."
          go-backend 'go-mode
          godoc-at-point-function 'godoc-gogetdoc)
      asm
-     python
-     java
+     (python :variables
+             python-format-on-save t
+             python-sort-imports-on-save t)
+     (java :variables
+           java-backend 'lsp)
      lua
      lsp
 
@@ -117,6 +120,7 @@ values."
      doom-themes
      doom-modeline
      magit-todos
+     nov
      rainbow-delimiters
      sublimity
      wttrin
@@ -409,7 +413,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
            )
           )
         )
-
+  (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode))
   (setup-indent-global 2) ;tab = 2 spaces
 
   )
@@ -422,7 +426,6 @@ This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
   (doom-modeline-mode)
-  (rainbow-mode)
   (setq inhibit-compacting-font-caches t)
 
   (magit-todos-mode)
@@ -434,7 +437,6 @@ you should place your code here."
 
   (setq lsp-enable-completion-at-point t)
   (setq lsp-ui-remap-xref-keybindings 1)
-  (setq lsp-rust-rls-command '("rustup" "run" "nightly" "rls"))
 
   (defconst jv-lsp-packages
     '(lsp-mode
