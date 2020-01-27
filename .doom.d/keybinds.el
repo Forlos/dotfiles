@@ -21,13 +21,10 @@
 (map! :leader
       :desc "Split window horizontally" "w -" #'evil-window-split)
 
-(map! :leader
-      :desc "Treemacs" "0" #'treemacs)
-
 ;; Shell
 (map! :leader
       :desc "Start eshell" "'" #'+eshell/toggle)
 
 ;; Misc
 (map! :leader
-      :desc "M-x" "SPC" #'helm-M-x)
+      :desc "M-x" "SPC" #'counsel-M-x)
