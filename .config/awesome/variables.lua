@@ -34,11 +34,12 @@ autostart = {
   "udiskie --smart-tray",
   "guake",
   "firefox",
-  "emacs",
-  "signal-desktop",
+  "emacs --daemon",
+  -- "telegram-desktop",
   "nautilus",
   "copyq",
   "clipmenud",
+  "virt-manager",
 }
 
 awful.layout.layouts = {

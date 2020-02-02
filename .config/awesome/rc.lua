@@ -193,15 +193,16 @@ local tasklist_buttons = gears.table.join(
                                               awful.client.focus.byidx(-1)
                                           end))
 
-local function set_wallpaper(s)
+local function set_wallpaper(s, wallpaper)
     -- Wallpaper
     if beautiful.wallpaper then
-        local wallpaper = beautiful.wallpaper
+        -- local wallpaper = beautiful.get().wallpaper
+        -- local wallpaper = beautiful.get().wallpapers[math.random(0, #beautiful.get().wallpapers)]
         -- If wallpaper is a function, call it with the screen
         if type(wallpaper) == "function" then
             wallpaper = wallpaper(s)
         end
-        gears.wallpaper.maximized(wallpaper, s, true)
+        gears.wallpaper.maximized(wallpaper, s)
     end
 end
 
@@ -311,7 +312,6 @@ globalkeys = gears.table.join(
             end
         end,
         {description = "go back", group = "client"}),
-
     -- Standard program
     awful.key({ modkey,           }, "Return", function () awful.spawn(terminal) end,
               {description = "open a terminal", group = "launcher"}),
@@ -332,36 +332,42 @@ globalkeys = gears.table.join(
               {description = "increase the number of columns", group = "layout"}),
     awful.key({ modkey, "Control" }, "l",     function () awful.tag.incncol(-1, nil, true)    end,
               {description = "decrease the number of columns", group = "layout"}),
-    awful.key({ modkey,           }, "space", function () awful.layout.inc( 1)                end,
-              {description = "select next", group = "layout"}),
-    awful.key({ modkey, "Shift"   }, "space", function () awful.layout.inc(-1)                end,
-              {description = "select previous", group = "layout"}),
-
-
-
-    awful.key({ modkey, "Control" }, "n",
-              function ()
-                  local c = awful.client.restore()
-                  -- Focus restored client
-                  if c then
-                      client.focus = c
-                      c:raise()
-                  end
-              end,
-              {description = "restore minimized", group = "client"}),
+    -- awful.key({ modkey,           }, "space", function () awful.layout.inc( 1)                end,
+    --           {description = "select next", group = "layout"}),
+    -- awful.key({ modkey, "Shift"   }, "space", function () awful.layout.inc(-1)                end,
+    --           {description = "select previous", group = "layout"}),
 
     -- Prompt
     awful.key({ modkey, "Shift" }, "0" , function () awful.util.spawn(rofi_power) end),
     awful.key({ }, "F2" , function () awful.util.spawn(rofi_run) end),
     awful.key({ }, "F3" , function () awful.spawn.with_shell(clipmenu) end),
-    awful.key({ }, "F4" , function () awful.util.spawn(copyq) end),
+    -- awful.key({ }, "F4" , function () awful.util.spawn(copyq) end),
     awful.key({ }, "Print" , function () awful.util.spawn(screenshot) end),
-    awful.key({ modkey, "Ctrl" }, "t" , function ()
-        display_todo(todo_file)
+    awful.key({ modkey, "Ctrl" }, "t" , function () display_todo(todo_file) end),
+    awful.key({ modkey, "Ctrl" }, "n" , function ()
+        beautiful.get().wallpaper_index = beautiful.get().wallpaper_index + 1
+        if(beautiful.get().wallpaper_index > #beautiful.get().wallpapers) then
+          beautiful.get().wallpaper_index = 0
+        end
+        awful.screen.connect_for_each_screen(
+          function(s)
+            set_wallpaper(s, beautiful.get().wallpapers[beautiful.get().wallpaper_index])
+        end)
+    end),
+    awful.key({ modkey, "Ctrl" }, "b" , function ()
+        beautiful.get().wallpaper_index = beautiful.get().wallpaper_index - 1
+        if(beautiful.get().wallpaper_index < 0) then
+          beautiful.get().wallpaper_index = #beautiful.get().wallpapers
+        end
+        awful.screen.connect_for_each_screen(
+          function(s)
+            set_wallpaper(s, beautiful.get().wallpapers[beautiful.get().wallpaper_index])
+        end)
     end),
 
-    awful.key({ modkey },            "r",     function () awful.screen.focused().mypromptbox:run() end,
-              {description = "run prompt", group = "launcher"}),
+
+    -- awful.key({ modkey },            "r",     function () awful.screen.focused().mypromptbox:run() end,
+    --           {description = "run prompt", group = "launcher"}),
 
     awful.key({ modkey }, "x",
               function ()
@@ -481,10 +487,9 @@ local tags = sharedtags({
     {name = "4.\u{f0c5} Files", lay=awful.layout.layouts[4], screen=2},
     {name = "5.\u{f1c1} Docs"},
     {name = "6.\u{f471} Pwn"},
-    -- {name = "\u{f141} Misc"},
     {name = "7.\u{f1b6} Steam"},
     {name = "8.\u{f0e5} Chat", lay=awful.layout.layouts[2], screen=2},
-    {name = "9.\u{f17a} VM", screen=2},
+    {name = "9.\u{f17a} VM"},
 })
 
 for i = 1, 9 do
@@ -595,22 +600,24 @@ awful.rules.rules = {
     },
 
     -- Set Firefox to always map on the tag named "2" on screen 1.
-    { rule = { class = "Firefox" },
+    { rule = { class = "firefox" },
       properties = {switchtotag=true , tags[1]} },
     { rule = { class = "Emacs" },
       properties = {maximized_vertical = true, maximized_horizontal = true,  tag = tags[2]} },
-    { rule = { class = "Signal" },
+    { rule = { class = "Telegram" },
       properties = {switchtotag=true,maximized_vertical = true, maximized_horizontal = true, tag=tags["8.\u{f0e5} Chat"] , opacity = 0.95, } },
     { rule = { class = "Steam" },
-      properties = {tag = tags[8]} },
+      properties = {tag = tags[7]} },
     { rule = { class = "Nautilus" },
       properties = {tag = tags[4]} },
     { rule = { class = "Evince" },
       properties = {tag = tags[5]} },
     { rule = { class = "jetbrains-idea-ce" },
-      properties = { opacity = 0.85 } },
-    { rule = { class = "Unity" },
-      properties = {tag = tags[7]} },
+      properties = { opacity = 0.95, tag = tags[2] } },
+    { rule = { class = "Virt-manager"},
+      properties = { tag = tags[9] } },
+    { rule = { class = "looking-glass-client"},
+      properties = { tag = tags[9] } },
 
 }
 -- }}}
@@ -722,7 +729,7 @@ end
 -- list/table if the file does not exist
 function lines_from(file)
   if not file_exists(file) then return {} end
-  lines = {}
+  local lines = {}
   for line in io.lines(file) do
     lines[#lines + 1] = line
   end

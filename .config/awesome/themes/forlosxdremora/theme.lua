@@ -10,9 +10,21 @@ local os = os
 local markup     = lain.util.markup
 local separators = lain.util.separators
 
+-- List of wallpapers
+wallpapers = {}
+local i = 0
+for f in io.popen('find ' .. os.getenv("HOME") .. "/.wallpapers/wallpapers/ -type f"):lines() do
+  wallpapers[i] = f
+  i = i + 1
+end
+math.randomseed(os.time())
+
 local theme                                     = {}
 theme.dir                                       = os.getenv("HOME") .. "/.config/awesome/themes/forlosxdremora"
-theme.wallpaper                                 = os.getenv("HOME") .. "/.wallpapers/Hyper-Light-Drifter_campfire-in-the-storm_1920x1080.png"
+-- theme.wallpaper                                 = os.getenv("HOME") .. "/.wallpapers/wallpapers/PagedOut_002_wallpaper_10.png"
+theme.wallpapers                                = wallpapers
+theme.wallpaper_index                           = math.random(0, #theme.wallpapers)
+theme.wallpaper                                 = theme.wallpapers[theme.wallpaper_index]
 
 theme.font                                      = "GohuFont Nerd Font Mono 10"
 theme.taglist_font                              = "GohuFont Nerd Font 10"
@@ -98,6 +110,17 @@ theme.cal = lain.widget.cal({
 }})
 mytextclock:disconnect_signal("mouse::enter", theme.cal.hover_on)
 
+-- OS
+-- theme.os = wibox.widget.textbox()
+-- vicious.register(
+--   theme.os,
+--   vicious.widgets.os,
+--   function(widget, args)
+--     return("%s %s"):format(args[1],args[2])
+--   end
+-- )
+-- theme.os.font = theme.taglist_font
+
 -- FS
 theme.fs = wibox.widget.textbox()
 vicious.cache(vicious.widgets.fs)
@@ -128,6 +151,10 @@ vicious.register(
 		return ("%s <span color=\"%s\">%s%%</span>"):format(
 			mem_icon, white, args[1]
 		)
+
+		-- return ("%s <span color=\"%s\">%sMB/%sMB</span>"):format(
+		-- 	mem_icon, white, args[2], args[3]
+		-- )
 	end
 )
 theme.mem.font = theme.taglist_font
@@ -273,6 +300,7 @@ function theme.at_screen_connect(s)
             first,
 			arll_pre,
 			wibox.container.background(theme.ther, theme.pw_bg),
+      theme.os,
 			arll_post,
 			theme.fs,
 			arll_pre,
