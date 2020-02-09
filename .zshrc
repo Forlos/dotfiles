@@ -6,7 +6,7 @@
 
 export ZSH="${HOME}/.oh-my-zsh"
 export TERM="xterm-256color"
-export PATH="${PATH}:${HOME}/.gem/ruby/2.5.0/bin/:${HOME}/.local/bin/:${HOME}/.scripts/:${HOME}/.cargo/bin:${HOME}/go/bin"
+export PATH="${PATH}:${HOME}/.gem/ruby/2.7.0/bin:${HOME}/.local/bin/:${HOME}/.scripts/:${HOME}/.cargo/bin:${HOME}/go/bin:${HOME}/.emacs.d/bin"
 export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
 export GO_PATH=${HOME}/go
 
@@ -22,7 +22,8 @@ alias cp="rsync -ah --progress"
 # Font mode for powerlevel9k
 POWERLEVEL9K_MODE="nerdfont-complete"
 
-ZSH_THEME="powerlevel9k/powerlevel9k"
+ZSH_THEME="powerlevel10k/powerlevel10k"
+# ZSH_THEME="powerlevel9k/powerlevel9k"
 #ZSH_THEME="robbyrussell"
 
 # Set list of themes to pick from when loading at random
@@ -100,8 +101,8 @@ plugins=(
 )
 
 #source $(dirname $(gem which colorls))/tab_complete.sh
-
 source $ZSH/oh-my-zsh.sh
+alias ls="colorls"
 # Show OS info when opening a new terminal
 
 #neofetch
@@ -135,7 +136,6 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-
 # Prompt settings
 POWERLEVEL9K_PROMPT_ON_NEWLINE=true
 POWERLEVEL9K_RPROMPT_ON_NEWLINE=true
@@ -225,6 +225,5 @@ fi
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status command_execution_time background_jobs time ram ip)
 
 catimg ~/.wallpapers/TOUHOUAYAYA.png
-
 
 source /home/forlos/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
