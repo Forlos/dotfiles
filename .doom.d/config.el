@@ -86,5 +86,9 @@
 ;; File extensions
 (add-to-list 'auto-mode-alist '("\\.ksy$" . yaml-mode))
 
+(use-package! nov
+  :mode ("\\.epub\\'" . nov-mode)
+  :config
+  (setq nov-save-place-file (concat doom-cache-dir "nov-places")))
 ;; SSH
 (keychain-refresh-environment)

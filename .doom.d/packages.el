@@ -13,4 +13,5 @@
 (package! lsp-python-ms)
 (package! wttrin)
 (package! keychain-environment)
+(package! nov)
 ;; (package! golden-ratio)
