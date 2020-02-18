@@ -24,7 +24,8 @@
 (setq
  doom-font (font-spec
                  :family "GohuFont Nerd Font"
-                 :size 16)
+                 ;; :family "Cozette"
+                 :size 14)
  doom-theme 'doom-city-lights
  ;; doom-theme 'doom-acario-dark
  ;; doom-theme 'doom-tomorrow-night
