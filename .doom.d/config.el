@@ -17,8 +17,9 @@
 ;;   lsp-ui-doc-delay 0.1
 ;;   lsp-ui-doc-max-width 150
 ;;   lsp-ui-doc-max-height 30)
-
-(setq lsp-rust-server 'rust-analyzer)
+(after! rustic
+  (setq rustic-lsp-server 'rust-analyzer
+        rustic-format-on-save t))
 
 ;; Theme
 (setq
