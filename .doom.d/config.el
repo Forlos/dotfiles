@@ -6,17 +6,26 @@
 
 ;; Variables
 (setq
- company-idle-delay 0.1
+ company-minimum-prefix-length 1
+ company-idle-delay 0.0
+ read-process-output-max (* 1024 1024)
 )
 
 ;; LSP config
 (add-hook! lsp-mode #'lsp-ui-mode )
-;; (add-hook! lsp-ui-mode #'lsp-ui-doc-mode)
-(setq lsp-ui-doc-header t)
-;; (setq-hook! lsp-ui-doc-mode
-;;   lsp-ui-doc-delay 0.1
-;;   lsp-ui-doc-max-width 150
-;;   lsp-ui-doc-max-height 30)
+(add-hook! lsp-ui-mode #'lsp-ui-doc-mode)
+
+(after! lsp-ui
+  (setq lsp-ui-doc-enable t
+        lsp-ui-doc-header t
+        lsp-ui-doc-include-signature t
+        lsp-ui-doc-delay 1.0
+        lsp-ui-sideline-delay 0.0
+        lsp-ui-doc-max-width 150
+        lsp-ui-doc-max-height 30
+        lsp-ui-doc-alignment 'frame
+        lsp-ui-doc-position 'top))
+
 (after! rustic
   (setq rustic-lsp-server 'rust-analyzer
         rustic-format-on-save t))
