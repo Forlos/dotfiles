@@ -29,4 +29,4 @@
 (map! :leader
       :desc "M-x" "SPC" #'counsel-M-x)
 
-(map! :v "TAB" #'indent-for-tab-command)
+(map! :v [tab] #'indent-for-tab-command)
