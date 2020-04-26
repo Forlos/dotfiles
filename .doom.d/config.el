@@ -33,9 +33,9 @@
 ;; Theme
 (setq
  doom-font (font-spec
-                 :family "GohuFont Nerd Font"
-                 ;; :family "Cozette"
-                 :size 14)
+            :family "GohuFont Nerd Font"
+            ;; :family "Cozette"
+            :size 14)
  doom-theme 'doom-city-lights
  ;; doom-theme 'doom-acario-dark
  ;; doom-theme 'doom-tomorrow-night
@@ -46,7 +46,7 @@
  doom-themes-treemacs-theme "doom-colors"
  display-line-numbers-type 'relative
  treemacs-show-cursor t
-)
+ )
 (doom-themes-treemacs-config)
 (doom-themes-org-config)
 (rainbow-delimiters-mode-enable)
@@ -68,7 +68,7 @@
         org-priority-faces '((?A :foreground "#e45659" :underline t)
                              (?B :foreground "#da8548")
                              (?C :foreground "#0098dd"))))
-(def-package! org-fancy-priorities
+(use-package! org-fancy-priorities
   :hook (org-mode . org-fancy-priorities-mode)
   :config
   (setq org-fancy-priorities-list '((?A . "HIGH")
