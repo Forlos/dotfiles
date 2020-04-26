@@ -40,6 +40,7 @@ autostart = {
   "copyq",
   "clipmenud",
   "virt-manager",
+  "kmix",
 }
 
 awful.layout.layouts = {
