@@ -14,4 +14,6 @@
 (package! wttrin)
 (package! keychain-environment)
 (package! nov)
+(package! focus)
+(package! format-all)
 ;; (package! golden-ratio)

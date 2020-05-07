@@ -23,10 +23,13 @@
 
 ;; Shell
 (map! :leader
-      :desc "Start eshell" "'" #'+eshell/toggle)
+      :desc "Start eshell" "'" #'+vterm/toggle)
 
 ;; Misc
 (map! :leader
       :desc "M-x" "SPC" #'counsel-M-x)
 
 (map! :v [tab] #'indent-for-tab-command)
+
+(map! :leader
+      :desc "Toggle focus mode" "b f" #'focus-mode)

@@ -9,11 +9,12 @@
  company-minimum-prefix-length 1
  company-idle-delay 0.0
  read-process-output-max (* 1024 1024)
-)
+ )
 
 ;; LSP config
 (add-hook! lsp-mode #'lsp-ui-mode )
 (add-hook! lsp-ui-mode #'lsp-ui-doc-mode)
+(setq lsp-rust-server 'rust-analyzer)
 
 (after! lsp-ui
   (setq lsp-ui-doc-enable t
@@ -28,7 +29,9 @@
 
 (after! rustic
   (setq rustic-lsp-server 'rust-analyzer
-        rustic-format-on-save t))
+        rustic-format-on-save t
+        lsp-rust-analyzer-server-command '("rust-analyzer")))
+;;(push 'rustic-clippy flycheck-checkers)
 
 ;; Theme
 (setq
@@ -37,6 +40,7 @@
             ;; :family "Cozette"
             :size 14)
  doom-theme 'doom-city-lights
+ ;; doom-theme 'doom-horizon
  ;; doom-theme 'doom-acario-dark
  ;; doom-theme 'doom-tomorrow-night
  ;; doom-theme 'doom-oceanic-next
@@ -46,12 +50,14 @@
  doom-themes-treemacs-theme "doom-colors"
  display-line-numbers-type 'relative
  treemacs-show-cursor t
+ doom-themes-neotree-file-icons t
  )
+(doom-themes-neotree-config)
 (doom-themes-treemacs-config)
 (doom-themes-org-config)
-(rainbow-delimiters-mode-enable)
-(global-color-identifiers-mode)
-
+(add-hook 'after-init-hook 'global-color-identifiers-mode)
+(add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
+(add-hook 'prog-mode-hook #'format-all-mode)
 
 
 ;; ORG
@@ -83,16 +89,16 @@
 (add-to-list 'default-frame-alist '(alpha . (90 . 60)))
 
 (defun toggle-transparency ()
- (interactive)
- (let ((alpha (frame-parameter nil 'alpha)))
-   (set-frame-parameter
-    nil 'alpha
-    (if (eql (cond ((numberp alpha) alpha)
-                   ((numberp (cdr alpha)) (cdr alpha))
-                   ;; Also handle undocumented (<active> <inactive>) form.
-                   ((numberp (cadr alpha)) (cadr alpha)))
-             100)
-        '(90 . 60) '(100 . 100)))))
+  (interactive)
+  (let ((alpha (frame-parameter nil 'alpha)))
+    (set-frame-parameter
+     nil 'alpha
+     (if (eql (cond ((numberp alpha) alpha)
+                    ((numberp (cdr alpha)) (cdr alpha))
+                    ;; Also handle undocumented (<active> <inactive>) form.
+                    ((numberp (cadr alpha)) (cadr alpha)))
+              100)
+         '(90 . 60) '(100 . 100)))))
 
 ;; File extensions
 (add-to-list 'auto-mode-alist '("\\.ksy$" . yaml-mode))
