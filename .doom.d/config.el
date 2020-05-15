@@ -8,13 +8,18 @@
 (setq
  company-minimum-prefix-length 1
  company-idle-delay 0.0
- read-process-output-max (* 1024 1024)
  )
 
+;; Git
+(after! magit
+  (magit-todos-mode)
+  (setq magit-todos-branch-list nil))
+
 ;; LSP config
-(add-hook! lsp-mode #'lsp-ui-mode )
-(add-hook! lsp-ui-mode #'lsp-ui-doc-mode)
-(setq lsp-rust-server 'rust-analyzer)
+(after! lsp
+  (add-hook! lsp-mode #'lsp-ui-mode )
+  (add-hook! lsp-ui-mode #'lsp-ui-doc-mode)
+  (setq lsp-rust-server 'rust-analyzer))
 
 (after! lsp-ui
   (setq lsp-ui-doc-enable t
@@ -30,6 +35,7 @@
 (after! rustic
   (setq rustic-lsp-server 'rust-analyzer
         rustic-format-on-save t
+        rustic-format-display-method nil
         lsp-rust-analyzer-server-command '("rust-analyzer")))
 ;;(push 'rustic-clippy flycheck-checkers)
 
