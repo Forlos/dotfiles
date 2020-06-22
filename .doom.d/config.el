@@ -39,6 +39,9 @@
         lsp-rust-analyzer-server-command '("rust-analyzer")))
 ;;(push 'rustic-clippy flycheck-checkers)
 
+(after! lsp-python-ms
+  (set-lsp-priority! 'mspyls 1))
+
 ;; Theme
 (setq
  doom-font (font-spec
