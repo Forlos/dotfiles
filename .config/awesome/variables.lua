@@ -29,7 +29,7 @@ kb_layout = "pl"
 is_laptop = false
 
 autostart = {
-	"unclutter",
+  "unclutter",
   "nm-applet",
   "udiskie --smart-tray",
   "guake",
@@ -41,6 +41,7 @@ autostart = {
   "clipmenud",
   "virt-manager",
   "kmix",
+  "blueman-manager",
 }
 
 awful.layout.layouts = {

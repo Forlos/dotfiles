@@ -18,8 +18,7 @@
 ;; LSP config
 (after! lsp
   (add-hook! lsp-mode #'lsp-ui-mode )
-  (add-hook! lsp-ui-mode #'lsp-ui-doc-mode)
-  (setq lsp-rust-server 'rust-analyzer))
+  (add-hook! lsp-ui-mode #'lsp-ui-doc-mode))
 
 (after! lsp-ui
   (setq lsp-ui-doc-enable t
@@ -36,8 +35,8 @@
   (setq rustic-lsp-server 'rust-analyzer
         rustic-format-on-save t
         rustic-format-display-method nil
-        lsp-rust-analyzer-server-command '("rust-analyzer")))
-;;(push 'rustic-clippy flycheck-checkers)
+        rustic-compile-display-method nil
+        lsp-rust-analyzer-cargo-watch-command "clippy"))
 
 (after! lsp-python-ms
   (set-lsp-priority! 'mspyls 1))

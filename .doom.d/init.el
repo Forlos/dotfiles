@@ -115,7 +115,7 @@
        ;; erlang            ; an elegant language for a more civilized age
        ;;ess               ; emacs speaks statistics
        ;;faust             ; dsp, but you get to keep your soul
-       ;;fsharp           ; ML stands for Microsoft's Language
+       (fsharp +lsp)           ; ML stands for Microsoft's Language
        ;; (go +lsp)                ; the hipster dialect
        (haskell +lsp) ; a language that's lazier than I am
        ;;hy                ; readability of scheme w/ speed of python
@@ -135,9 +135,9 @@
        ;;ocaml             ; an objective camel
        (org              ; organize your plain life in plain text
         +dragndrop       ; drag & drop files/images into org buffers
-                                        ;+hugo            ; use Emacs for hugo blogging
-        +ipython         ; ipython/jupyter support for babel
+        +hugo            ; use Emacs for hugo blogging
         +pandoc          ; export-with-pandoc support
+        +pretty
                                         ;+pomodoro        ; be fruitful with the tomato technique
         +present)        ; using org-mode for presentations
        ;;perl              ; write code no one else can comprehend
