@@ -1,0 +1,7 @@
+#!/bin/bash
+
+looking-glass-client -s -F > /dev/null 2>&1 & # Starts Looking Glass, and ignores all output (We aren't watching anyways)
+scream -o pulse -i bridge0 
+
+wait -n # We wait for any of these processes to exit. (Like closing the Looking Glass window, in our case)
+pkill -P $$ # We kill the remaining processes (In our case, scream)
