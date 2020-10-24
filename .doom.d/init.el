@@ -20,6 +20,7 @@
        (ivy
         ;; +icons
         ;; +childframe
+        +prescient
         +fuzzy)               ; a search engine for love and life
 
        :ui
@@ -46,12 +47,14 @@
        vi-tilde-fringe   ; fringe tildes to mark beyond EOB
        window-select     ; visually switch windows
        workspaces        ; tab emulation, persistence & separate workspaces
+       zen
+       ;; minimap
 
        :editor
        (evil +everywhere); come to the dark side, we have cookies
        file-templates    ; auto-snippets for empty files
        fold              ; (nigh) universal code folding
-       (format)  ; automated prettiness
+       (format +onsave)  ; automated prettiness
        ;;god               ; run Emacs commands without modifier keys
        ;;lispy             ; vim for lisp, for people who dont like vim
        multiple-cursors  ; editing in many places at once
@@ -115,9 +118,9 @@
        ;; erlang            ; an elegant language for a more civilized age
        ;;ess               ; emacs speaks statistics
        ;;faust             ; dsp, but you get to keep your soul
-       (fsharp +lsp)           ; ML stands for Microsoft's Language
+       ;; (fsharp +lsp)           ; ML stands for Microsoft's Language
        ;; (go +lsp)                ; the hipster dialect
-       (haskell +lsp) ; a language that's lazier than I am
+       ;; (haskell +lsp) ; a language that's lazier than I am
        ;;hy                ; readability of scheme w/ speed of python
        ;;idris             ;
        ;; (java +lsp) ; the poster child for carpal tunnel syndrome
@@ -144,7 +147,9 @@
        ;;php               ; perl's insecure younger brother
        ;;plantuml          ; diagrams for confusing people more
        ;;purescript        ; javascript, but functional
-       (python +lsp)            ; beautiful is better than ugly
+       (python
+        +lsp
+        +pyright)            ; beautiful is better than ugly
        ;;qt                ; the 'cutest' gui framework ever
        ;;racket            ; a DSL for DSLs
        ;;rest              ; Emacs as a REST client

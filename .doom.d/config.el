@@ -38,9 +38,6 @@
         rustic-compile-display-method nil
         lsp-rust-analyzer-cargo-watch-command "clippy"))
 
-(after! lsp-python-ms
-  (set-lsp-priority! 'mspyls 1))
-
 ;; Theme
 (setq
  doom-font (font-spec
