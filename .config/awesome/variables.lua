@@ -19,8 +19,8 @@ screenshot = "gnome-screenshot -i"
 
 scripts = "~/.scripts/"
 
-screen1 = "HDMI-0"
-screen2 = "DVI-D-0"
+screen1 = "DVI-D-0"
+screen2 = "DP-0"
 
 lockscreen = "betterlockscreen -l dimblur"
 

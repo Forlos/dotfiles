@@ -56,7 +56,7 @@ end
 
 -- Compton init
 
-awful.spawn.with_shell("~/.config/awesome/autorun.sh " .. "compton -b")
+awful.spawn.with_shell("~/.config/awesome/autorun.sh " .. "picom -b")
 
 beautiful.init(string.format("%s/.config/awesome/themes/%s/theme.lua", home_path, "forlosxdremora"))
 
@@ -617,7 +617,9 @@ awful.rules.rules = {
     { rule = { class = "Virt-manager"},
       properties = { tag = tags[9] } },
     { rule = { class = "looking-glass-client"},
-      properties = { tag = tags[9] } },
+      properties = { tag = tags[9], fullscreen = true } },
+    { rule = { class = "anki"},
+      properties = { tag = tags[5] } },
 
 }
 -- }}}
