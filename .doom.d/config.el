@@ -8,6 +8,7 @@
 (setq
  company-minimum-prefix-length 1
  company-idle-delay 0.0
+ company-tooltip-idle-delay 1.0
  )
 
 ;; Git
@@ -18,7 +19,8 @@
 ;; LSP config
 (after! lsp
   (add-hook! lsp-mode #'lsp-ui-mode )
-  (add-hook! lsp-ui-mode #'lsp-ui-doc-mode))
+  (add-hook! lsp-ui-mode #'lsp-ui-doc-mode)
+  (setq lsp-log-io nil))
 
 (after! lsp-ui
   (setq lsp-ui-doc-enable t
@@ -36,6 +38,7 @@
         rustic-format-on-save t
         rustic-format-display-method nil
         rustic-compile-display-method nil
+        lsp-headerline-breadcrumb-enable nil
         lsp-rust-analyzer-cargo-watch-command "clippy"))
 
 ;; Theme
