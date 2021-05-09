@@ -1,0 +1,8 @@
+require("plug-config.compe")
+require("plug-config.format")
+require("plug-config.git")
+require("plug-config.lsp")
+require("plug-config.nvimtree")
+require("plug-config.telescope")
+require("plug-config.treesitter")
+require("plug-config.whichkey")
