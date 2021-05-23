@@ -16,6 +16,8 @@ return require("packer").startup(
         use {"folke/tokyonight.nvim"}
         use {"kyazdani42/nvim-tree.lua", requires = {"kyazdani42/nvim-web-devicons"}}
         use {"p00f/nvim-ts-rainbow"}
+        use {"folke/todo-comments.nvim", requires = {"nvim-lua/plenary.nvim"}}
+        use {"glepnir/dashboard-nvim"}
 
         -- Lsp
         use {"neovim/nvim-lspconfig"}
@@ -32,20 +34,21 @@ return require("packer").startup(
         use {"kosayoda/nvim-lightbulb"}
         use {"glepnir/lspsaga.nvim"}
         use {"onsails/lspkind-nvim"}
+        use {"ahmedkhalf/lsp-rooter.nvim"}
 
         -- Format
         use {"lukas-reineke/format.nvim"}
-        use "b3nj5m1n/kommentary"
-        use "jiangmiao/auto-pairs"
+        use {"b3nj5m1n/kommentary"}
+        use {"jiangmiao/auto-pairs"}
 
         -- Geneal Tools
-        use "tweekmonster/startuptime.vim"
-        use "folke/which-key.nvim"
+        use {"tweekmonster/startuptime.vim"}
+        use {"folke/which-key.nvim"}
         use {
             "nvim-telescope/telescope.nvim",
             requires = {{"nvim-lua/popup.nvim"}, {"nvim-lua/plenary.nvim"}}
         }
-        use "nvim-telescope/telescope-media-files.nvim"
+        use {"nvim-telescope/telescope-media-files.nvim"}
 
         -- Git
         use {"lewis6991/gitsigns.nvim", requires = {"nvim-lua/plenary.nvim"}}
@@ -54,6 +57,12 @@ return require("packer").startup(
         -- Utils
         use {"norcalli/nvim_utils"}
         use {"famiu/nvim-reload"}
+        use {
+            "folke/zen-mode.nvim",
+            config = function()
+                require("zen-mode").setup {}
+            end
+        }
 
         -- Org
         use {

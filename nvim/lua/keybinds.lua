@@ -19,6 +19,7 @@ vim.api.nvim_set_keymap("n", "<Leader>bb", "<cmd>Telescope buffers<cr>", {norema
 -- Search
 vim.api.nvim_set_keymap("n", "<Leader>ss", "<cmd>Telescope current_buffer_fuzzy_find<cr>", {noremap = true})
 vim.api.nvim_set_keymap("n", "<Leader>sp", "<cmd>Telescope live_grep<cr>", {noremap = true})
+vim.api.nvim_set_keymap("n", "<Leader>st", "<cmd>TodoTelescope<cr>", {noremap = true})
 
 -- Project
 vim.api.nvim_set_keymap("n", "<Leader>pf", "<cmd>Telescope find_files<cr>", {noremap = true})
@@ -39,7 +40,6 @@ vim.api.nvim_set_keymap(
 )
 vim.api.nvim_set_keymap("n", "<leader>cd", "<cmd>Telescope lsp_definitions<cr>", {silent = true, noremap = true})
 vim.api.nvim_set_keymap("n", "<leader>cD", "<cmd>Telescope lsp_references<cr>", {silent = true, noremap = true})
--- vim.api.nvim_set_keymap("n", "<leader>ca", "<cmd>Telescope lsp_code_actions<cr>", {silent = true, noremap = true})
 vim.api.nvim_set_keymap("n", "<leader>ca", "<cmd>Lspsaga code_action<cr>", {silent = true, noremap = true})
 vim.api.nvim_set_keymap("n", "<leader>cr", "<cmd>Lspsaga rename<cr>", {silent = true, noremap = true})
 vim.api.nvim_set_keymap("n", "K", "<cmd>Lspsaga hover_doc<cr>", {silent = true, noremap = true})
@@ -52,7 +52,10 @@ vim.api.nvim_set_keymap("n", "<Leader>sv", "<cmd>Telescope vim_options<cr>", {no
 
 -- Global
 vim.api.nvim_set_keymap("n", "<Leader><Leader>", "<cmd>Telescope commands<cr>", {noremap = true})
-vim.api.nvim_set_keymap("n", "<Leader>'", "<cmd>Lspsaga open_floaterm<cr>", {noremap = true})
+vim.api.nvim_set_keymap("n", "<Leader>'", "<cmd>Lspsaga open_floaterm<cr>", {noremap = true, silent = true})
+vim.api.nvim_set_keymap("t", "<Leader>'", "<cmd>Lspsaga close_floaterm<cr>", {noremap = true, silent = true})
+vim.api.nvim_set_keymap("t", "<Leader>qq", "<cmd>Lspsaga close_floaterm<cr>", {noremap = true, silent = true})
+vim.api.nvim_set_keymap("t", "<Leader>bd", "<cmd>Lspsaga close_floaterm<cr>", {noremap = true, silent = true})
 
 -- Git
 vim.api.nvim_set_keymap("n", "<Leader>gg", "<cmd>Neogit<cr>", {noremap = true})

@@ -75,6 +75,10 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/forlos/.local/share/nvim/site/pack/packer/start/auto-pairs"
   },
+  ["dashboard-nvim"] = {
+    loaded = true,
+    path = "/home/forlos/.local/share/nvim/site/pack/packer/start/dashboard-nvim"
+  },
   ["format.nvim"] = {
     loaded = true,
     path = "/home/forlos/.local/share/nvim/site/pack/packer/start/format.nvim"
@@ -86,6 +90,10 @@ _G.packer_plugins = {
   kommentary = {
     loaded = true,
     path = "/home/forlos/.local/share/nvim/site/pack/packer/start/kommentary"
+  },
+  ["lsp-rooter.nvim"] = {
+    loaded = true,
+    path = "/home/forlos/.local/share/nvim/site/pack/packer/start/lsp-rooter.nvim"
   },
   ["lsp-status.nvim"] = {
     loaded = true,
@@ -181,6 +189,10 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/forlos/.local/share/nvim/site/pack/packer/start/telescope.nvim"
   },
+  ["todo-comments.nvim"] = {
+    loaded = true,
+    path = "/home/forlos/.local/share/nvim/site/pack/packer/start/todo-comments.nvim"
+  },
   ["tokyonight.nvim"] = {
     loaded = true,
     path = "/home/forlos/.local/share/nvim/site/pack/packer/start/tokyonight.nvim"
@@ -192,6 +204,11 @@ _G.packer_plugins = {
   ["which-key.nvim"] = {
     loaded = true,
     path = "/home/forlos/.local/share/nvim/site/pack/packer/start/which-key.nvim"
+  },
+  ["zen-mode.nvim"] = {
+    config = { "\27LJ\2\n:\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\rzen-mode\frequire\0" },
+    loaded = true,
+    path = "/home/forlos/.local/share/nvim/site/pack/packer/start/zen-mode.nvim"
   }
 }
 
@@ -200,6 +217,10 @@ time("Defining packer_plugins", false)
 time("Config for neorg", true)
 try_loadstring("\27LJ\2\n7\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\nneorg\frequire\0", "config", "neorg")
 time("Config for neorg", false)
+-- Config for: zen-mode.nvim
+time("Config for zen-mode.nvim", true)
+try_loadstring("\27LJ\2\n:\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\rzen-mode\frequire\0", "config", "zen-mode.nvim")
+time("Config for zen-mode.nvim", false)
 if should_profile then save_profiles() end
 
 END

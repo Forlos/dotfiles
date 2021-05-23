@@ -16,6 +16,13 @@ nvim_create_augroups(
 )
 
 lsp_saga.init_lsp_saga {
+    use_saga_diagnostic_sign = true,
+    dianostic_header_icon = "   ",
+    code_action_icon = " ",
+    error_sign = "",
+    warn_sign = "",
+    hint_sign = "",
+    infor_sign = "",
     code_action_keys = {
         quit = {"q", "<esc>"},
         exec = "<CR>"
@@ -93,7 +100,7 @@ local opts = {
         -- whether to show hover actions inside the hover window
         -- this overrides the default hover handler so something like lspsaga.nvim's hover would be overriden by this
         -- default: true
-        hover_with_actions = true,
+        hover_with_actions = false,
         -- All opts that go into inlay hints (scroll down a bit) can also go here,
         -- these apply to the default RustSetInlayHints command
         inlay_hints = {
