@@ -80,7 +80,7 @@ lsp_config.pyright.setup {
     settings = {
         python = {
             analysis = {
-                typeCheckingMode = "strict",
+                -- typeCheckingMode = "strict",
                 diagnosticMode = "workspace"
             }
         }

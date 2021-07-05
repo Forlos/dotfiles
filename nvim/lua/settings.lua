@@ -3,6 +3,7 @@ vim.api.nvim_set_option("termguicolors", true)
 vim.api.nvim_set_option("mouse", "a")
 vim.api.nvim_set_option("timeoutlen", 500)
 vim.api.nvim_set_option("foldmethod", "manual")
+vim.api.nvim_set_option("hidden", true)
 
 -- https://github.com/nanotee/nvim-lua-guide/blob/master/README.md#caveats-3
 vim.bo.tabstop = 4

@@ -15,6 +15,8 @@ vim.api.nvim_set_keymap("n", "<Leader>fr", "<cmd>Telescope oldfiles<cr>", {norem
 
 --- Buffer
 vim.api.nvim_set_keymap("n", "<Leader>bb", "<cmd>Telescope buffers<cr>", {noremap = true})
+vim.api.nvim_set_keymap("n", "<Leader>bd", "<cmd>:bdelete<cr>", {noremap = true})
+vim.api.nvim_set_keymap("n", "<Leader>`", "<cmd>:e #<cr>", {noremap = true})
 
 -- Search
 vim.api.nvim_set_keymap("n", "<Leader>ss", "<cmd>Telescope current_buffer_fuzzy_find<cr>", {noremap = true})
@@ -51,9 +53,9 @@ vim.api.nvim_set_keymap("n", "<Leader>op", "<Cmd>:NvimTreeToggle<CR>", {noremap 
 vim.api.nvim_set_keymap("n", "<Leader>sv", "<cmd>Telescope vim_options<cr>", {noremap = true})
 
 -- Global
-vim.api.nvim_set_keymap("n", "<Leader><Leader>", "<cmd>Telescope commands<cr>", {noremap = true})
-vim.api.nvim_set_keymap("n", "<Leader>'", "<cmd>Lspsaga open_floaterm<cr>", {noremap = true, silent = true})
-vim.api.nvim_set_keymap("t", "<Leader>'", "<cmd>Lspsaga close_floaterm<cr>", {noremap = true, silent = true})
+vim.api.nvim_set_keymap("n", "<Leader><Leader>", "<cmd>Cheatsheet<cr>", {noremap = true})
+vim.api.nvim_set_keymap("n", "<Leader>'", "<cmd>ToggleTerm<cr>", {noremap = true, silent = true})
+vim.api.nvim_set_keymap("t", "<Leader>'", "<cmd>ToggleTerm<cr>", {noremap = true, silent = true})
 vim.api.nvim_set_keymap("t", "<Leader>qq", "<cmd>Lspsaga close_floaterm<cr>", {noremap = true, silent = true})
 vim.api.nvim_set_keymap("t", "<Leader>bd", "<cmd>Lspsaga close_floaterm<cr>", {noremap = true, silent = true})
 

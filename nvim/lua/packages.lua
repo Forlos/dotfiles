@@ -7,6 +7,8 @@ return require("packer").startup(
 
         -- Syntax
         use {"nvim-treesitter/nvim-treesitter", run = ":TSUpdate"}
+        use {"p00f/nvim-ts-rainbow"}
+        use {"nvim-treesitter/nvim-treesitter-refactor"}
 
         -- Theme
         use {
@@ -15,7 +17,6 @@ return require("packer").startup(
         }
         use {"folke/tokyonight.nvim"}
         use {"kyazdani42/nvim-tree.lua", requires = {"kyazdani42/nvim-web-devicons"}}
-        use {"p00f/nvim-ts-rainbow"}
         use {"folke/todo-comments.nvim", requires = {"nvim-lua/plenary.nvim"}}
         use {"glepnir/dashboard-nvim"}
 
@@ -49,6 +50,14 @@ return require("packer").startup(
             requires = {{"nvim-lua/popup.nvim"}, {"nvim-lua/plenary.nvim"}}
         }
         use {"nvim-telescope/telescope-media-files.nvim"}
+        use {
+            "sudormrfbin/cheatsheet.nvim",
+            requires = {
+                {"nvim-telescope/telescope.nvim"},
+                {"nvim-lua/popup.nvim"},
+                {"nvim-lua/plenary.nvim"}
+            }
+        }
 
         -- Git
         use {"lewis6991/gitsigns.nvim", requires = {"nvim-lua/plenary.nvim"}}
@@ -63,13 +72,20 @@ return require("packer").startup(
                 require("zen-mode").setup {}
             end
         }
+        use {"akinsho/nvim-toggleterm.lua"}
 
         -- Org
-        use {
+        --[[ use {
             "vhyrro/neorg",
             branch = "unstable",
             config = function()
                 require("neorg").setup {}
+            end
+        } ]]
+        use {
+            "kristijanhusak/orgmode.nvim",
+            config = function()
+                require("orgmode").setup {}
             end
         }
     end
