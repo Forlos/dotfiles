@@ -11,7 +11,7 @@ require("gitsigns").setup {
         changedelete = {hl = "GitSignsChange", text = "~", numhl = "GitSignsChangeNr", linehl = "GitSignsChangeLn"}
     },
     numhl = true,
-    linehl = true,
+    linehl = false,
     keymaps = {},
     watch_index = {
         interval = 1000

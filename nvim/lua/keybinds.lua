@@ -15,7 +15,7 @@ vim.api.nvim_set_keymap("n", "<Leader>fr", "<cmd>Telescope oldfiles<cr>", {norem
 
 --- Buffer
 vim.api.nvim_set_keymap("n", "<Leader>bb", "<cmd>Telescope buffers<cr>", {noremap = true})
-vim.api.nvim_set_keymap("n", "<Leader>bd", "<cmd>:bdelete<cr>", {noremap = true})
+vim.api.nvim_set_keymap("n", "<Leader>bd", "<cmd>:Bdelete<cr>", {noremap = true})
 vim.api.nvim_set_keymap("n", "<Leader>`", "<cmd>:e #<cr>", {noremap = true})
 
 -- Search

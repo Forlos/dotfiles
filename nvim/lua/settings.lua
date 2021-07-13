@@ -1,3 +1,5 @@
+require("nvim_utils")
+
 vim.api.nvim_set_option("clipboard", "unnamedplus")
 vim.api.nvim_set_option("termguicolors", true)
 vim.api.nvim_set_option("mouse", "a")
@@ -21,6 +23,7 @@ vim.o.textwidth = 96
 vim.o.completeopt = "menuone,noselect"
 
 vim.wo.relativenumber = true
+vim.wo.number = true
 
 vim.wo.foldenable = false
 
@@ -29,3 +32,10 @@ vim.g.neovide_cursor_animation_length = 0
 vim.g.neovide_cursor_antialiasing = true
 
 vim.o.guifont = "GohuFont Nerd Font"
+
+-- Custom filetypes
+nvim_create_augroups(
+    {
+        kaitai_filetype = {" BufNewFile,BufRead *.ksy setf yaml"}
+    }
+)

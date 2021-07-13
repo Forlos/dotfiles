@@ -73,6 +73,7 @@ return require("packer").startup(
             end
         }
         use {"akinsho/nvim-toggleterm.lua"}
+        use {"famiu/bufdelete.nvim"}
 
         -- Org
         --[[ use {
