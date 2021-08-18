@@ -33,9 +33,18 @@ vim.g.neovide_cursor_antialiasing = true
 
 vim.o.guifont = "GohuFont Nerd Font"
 
+-- Project,nvim config
+vim.g.nvim_tree_update_cwd = 1
+vim.g.nvim_tree_respect_buf_cwd = 1
+
 -- Custom filetypes
 nvim_create_augroups(
     {
         kaitai_filetype = {" BufNewFile,BufRead *.ksy setf yaml"}
     }
 )
+
+--[[ vim.g.coq_settings = {
+    ["display.preview.positions"] = {["north"] = 2, ["south"] = 3, ["west"] = 4, ["east"] = 1},
+    ["auto_start"] = true
+} ]]

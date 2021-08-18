@@ -31,11 +31,20 @@ return require("packer").startup(
                 "nvim-lua/plenary.nvim"
             }
         }
-        use {"hrsh7th/nvim-compe", requires = {"hrsh7th/vim-vsnip"}}
         use {"kosayoda/nvim-lightbulb"}
         use {"glepnir/lspsaga.nvim"}
         use {"onsails/lspkind-nvim"}
-        use {"ahmedkhalf/lsp-rooter.nvim"}
+        -- use {"ahmedkhalf/lsp-rooter.nvim"}
+        use {
+            "ahmedkhalf/project.nvim",
+            config = function()
+                require("project_nvim").setup {}
+            end
+        }
+
+        -- Completion
+        use {"hrsh7th/nvim-compe", requires = {"hrsh7th/vim-vsnip"}}
+        -- use {"ms-jpq/coq_nvim", branch = "coq"}
 
         -- Format
         use {"lukas-reineke/format.nvim"}
