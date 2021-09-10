@@ -34,7 +34,6 @@ return require("packer").startup(
         use {"kosayoda/nvim-lightbulb"}
         use {"glepnir/lspsaga.nvim"}
         use {"onsails/lspkind-nvim"}
-        -- use {"ahmedkhalf/lsp-rooter.nvim"}
         use {
             "ahmedkhalf/project.nvim",
             config = function()
@@ -43,8 +42,14 @@ return require("packer").startup(
         }
 
         -- Completion
-        use {"hrsh7th/nvim-compe", requires = {"hrsh7th/vim-vsnip"}}
-        -- use {"ms-jpq/coq_nvim", branch = "coq"}
+        --[[ use {
+            "hrsh7th/nvim-cmp",
+            requires = {
+                "hrsh7th/vim-vsnip",
+                "hrsh7th/cmp-buffer"
+            }
+        } ]]
+        use {"ms-jpq/coq_nvim", branch = "coq"}
 
         -- Format
         use {"lukas-reineke/format.nvim"}

@@ -1,4 +1,4 @@
-require("plug-config.compe")
+-- require("plug-config.completion")
 require("plug-config.dashboard")
 require("plug-config.format")
 require("plug-config.git")

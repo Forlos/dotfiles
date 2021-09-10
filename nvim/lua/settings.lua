@@ -44,7 +44,7 @@ nvim_create_augroups(
     }
 )
 
---[[ vim.g.coq_settings = {
+vim.g.coq_settings = {
     ["display.preview.positions"] = {["north"] = 2, ["south"] = 3, ["west"] = 4, ["east"] = 1},
     ["auto_start"] = true
-} ]]
+}
