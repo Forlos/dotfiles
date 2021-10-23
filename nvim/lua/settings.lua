@@ -27,6 +27,8 @@ vim.wo.number = true
 
 vim.wo.foldenable = false
 
+vim.opt_global.shortmess:remove("F")
+
 -- Neovide config
 vim.g.neovide_cursor_animation_length = 0
 vim.g.neovide_cursor_antialiasing = true

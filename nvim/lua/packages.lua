@@ -40,6 +40,11 @@ return require("packer").startup(
                 require("project_nvim").setup {}
             end
         }
+        use {
+            "weilbith/nvim-code-action-menu",
+            cmd = "CodeActionMenu"
+        }
+        use {"scalameta/nvim-metals"}
 
         -- Completion
         --[[ use {
@@ -88,6 +93,12 @@ return require("packer").startup(
         }
         use {"akinsho/nvim-toggleterm.lua"}
         use {"famiu/bufdelete.nvim"}
+        use {
+            "luukvbaal/stabilize.nvim",
+            config = function()
+                require("stabilize").setup()
+            end
+        }
 
         -- Org
         --[[ use {
@@ -101,6 +112,14 @@ return require("packer").startup(
             "kristijanhusak/orgmode.nvim",
             config = function()
                 require("orgmode").setup {}
+            end
+        }
+
+        -- Neovim in browser
+        use {
+            "glacambre/firenvim",
+            run = function()
+                vim.fn["firenvim#install"](0)
             end
         }
     end

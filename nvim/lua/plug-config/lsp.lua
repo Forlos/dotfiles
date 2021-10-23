@@ -177,3 +177,23 @@ lsp_config.sumneko_lua.setup {
         }
     }
 }
+
+-- Scala
+metals_config = require("metals").bare_config()
+metals_config.init_options.statusBarProvider = "on"
+metals_config.settings = {
+    showImplicitArguments = true,
+    excludedPackages = {
+        "akka.actor.typed.javadsl",
+        "com.github.swagger.akka.javadsl"
+    }
+}
+metals_config.on_attach = function()
+    require "completion".on_attach()
+end
+
+vim.cmd([[augroup lsp]])
+vim.cmd([[autocmd!]])
+vim.cmd([[autocmd FileType scala setlocal omnifunc=v:lua.vim.lsp.omnifunc]])
+vim.cmd([[autocmd FileType scala,sbt lua require("metals").initialize_or_attach(metals_config)]])
+vim.cmd([[augroup end]])
