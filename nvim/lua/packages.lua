@@ -32,17 +32,13 @@ return require("packer").startup(
             }
         }
         use {"kosayoda/nvim-lightbulb"}
-        use {"glepnir/lspsaga.nvim"}
+        use {"tami5/lspsaga.nvim", branch = "nvim51"}
         use {"onsails/lspkind-nvim"}
         use {
             "ahmedkhalf/project.nvim",
             config = function()
                 require("project_nvim").setup {}
             end
-        }
-        use {
-            "weilbith/nvim-code-action-menu",
-            cmd = "CodeActionMenu"
         }
         use {"scalameta/nvim-metals"}
 
