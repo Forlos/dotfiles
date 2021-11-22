@@ -11,7 +11,7 @@ treesitter.setup {
     rainbow = {
         enable = true,
         extended_mode = false, -- Highlight also non-parentheses delimiters, boolean or table: lang -> boolean
-        max_file_lines = 2000 -- Do not enable for files with more than, int
+        max_file_lines = 3000 -- Do not enable for files with more than, int
     },
     refactor = {
         highlight_definitions = {

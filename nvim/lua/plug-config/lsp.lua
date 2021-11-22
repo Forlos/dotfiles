@@ -6,7 +6,20 @@ local lsp_trouble = require("trouble")
 local lsp_saga = require "lspsaga"
 local lsp_kind = require("lspkind")
 
-lsp_kind.init()
+lsp_kind.init(
+    {
+        -- enables text annotations
+        --
+        -- default: true
+        with_text = true,
+        -- default symbol map
+        -- can be either 'default' (requires nerd-fonts font) or
+        -- 'codicons' for codicon preset (requires vscode-codicons font)
+        --
+        -- default: 'default'
+        preset = "codicons"
+    }
+)
 lsp_status.register_progress()
 
 nvim_create_augroups(

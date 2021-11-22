@@ -61,3 +61,6 @@ vim.api.nvim_set_keymap("t", "<Leader>bd", "<cmd>Lspsaga close_floaterm<cr>", {n
 
 -- Git
 vim.api.nvim_set_keymap("n", "<Leader>gg", "<cmd>Neogit<cr>", {noremap = true})
+vim.api.nvim_set_keymap("n", "<Leader>gb", "<cmd>Gitsigns blame_line<cr>", {noremap = true})
+vim.api.nvim_set_keymap("n", "<Leader>gp", "<cmd>Gitsigns preview_hunk<cr>", {noremap = true})
+vim.api.nvim_set_keymap("n", "<Leader>gr", "<cmd>Gitsigns reset_hunk<cr>", {noremap = true})

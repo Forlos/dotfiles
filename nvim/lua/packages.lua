@@ -76,7 +76,7 @@ return require("packer").startup(
 
         -- Git
         use {"lewis6991/gitsigns.nvim", requires = {"nvim-lua/plenary.nvim"}}
-        use {"TimUntersberger/neogit", requires = "nvim-lua/plenary.nvim"}
+        use {"TimUntersberger/neogit", requires = {"nvim-lua/plenary.nvim", "sindrets/diffview.nvim"}}
 
         -- Utils
         use {"norcalli/nvim_utils"}
