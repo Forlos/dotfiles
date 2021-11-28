@@ -42,7 +42,7 @@ vim.api.nvim_set_keymap(
 )
 vim.api.nvim_set_keymap("n", "<leader>cd", "<cmd>Telescope lsp_definitions<cr>", {silent = true, noremap = true})
 vim.api.nvim_set_keymap("n", "<leader>cD", "<cmd>Telescope lsp_references<cr>", {silent = true, noremap = true})
-vim.api.nvim_set_keymap("n", "<leader>ca", "<cmd>Lspsaga range_code_action<cr>", {silent = true, noremap = true})
+vim.api.nvim_set_keymap("n", "<leader>ca", "<cmd>Lspsaga code_action<cr>", {silent = true, noremap = true})
 vim.api.nvim_set_keymap("n", "<leader>cr", "<cmd>Lspsaga rename<cr>", {silent = true, noremap = true})
 vim.api.nvim_set_keymap("n", "K", "<cmd>Lspsaga hover_doc<cr>", {silent = true, noremap = true})
 
