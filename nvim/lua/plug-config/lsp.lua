@@ -30,7 +30,7 @@ nvim_create_augroups(
 
 lsp_saga.init_lsp_saga {
     use_saga_diagnostic_sign = true,
-    dianostic_header_icon = "   ",
+    diagnostic_header_icon = "   ",
     code_action_icon = " ",
     error_sign = "",
     warn_sign = "",

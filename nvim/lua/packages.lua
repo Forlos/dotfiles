@@ -32,7 +32,7 @@ return require("packer").startup(
             }
         }
         use {"kosayoda/nvim-lightbulb"}
-        use {"tami5/lspsaga.nvim", branch = "nvim51"}
+        use {"tami5/lspsaga.nvim"}
         use {"onsails/lspkind-nvim"}
         use {
             "ahmedkhalf/project.nvim",
