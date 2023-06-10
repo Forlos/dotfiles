@@ -1,15 +1,15 @@
 require("nvim_utils")
 
--- Formating on save
+--[[ -- Formating on save
 nvim_create_augroups(
     {
         Format = {"BufWritePost * FormatWrite"},
         LspFormat = {"BufWritePre * lua vim.lsp.buf.formatting_sync(nil, 1000)"}
     }
-)
+) ]]
 
 -- Define what files to format on save
-require "format".setup {
+require "lsp-format".setup {
     ["*"] = {
         {cmd = {"sed -i 's/[ \t]*$//'"}} -- remove trailing whitespace
     },

@@ -23,7 +23,6 @@ return require("packer").startup(
         -- Lsp
         use {"neovim/nvim-lspconfig"}
         use {"nvim-lua/lsp-status.nvim"}
-        use {"folke/lsp-trouble.nvim", requires = {"kyazdani42/nvim-web-devicons"}}
         use {
             "simrat39/rust-tools.nvim",
             requires = {
@@ -53,7 +52,7 @@ return require("packer").startup(
         use {"ms-jpq/coq_nvim", branch = "coq"}
 
         -- Format
-        use {"lukas-reineke/format.nvim"}
+        use {"lukas-reineke/lsp-format.nvim"}
         use {"b3nj5m1n/kommentary"}
         use {"jiangmiao/auto-pairs"}
 
@@ -108,6 +107,7 @@ return require("packer").startup(
             "kristijanhusak/orgmode.nvim",
             config = function()
                 require("orgmode").setup {}
+                require('orgmode').setup_ts_grammar()
             end
         }
 

@@ -2,21 +2,12 @@ require("nvim_utils")
 
 local lsp_config = require "lspconfig"
 local lsp_status = require("lsp-status")
-local lsp_trouble = require("trouble")
 local lsp_saga = require "lspsaga"
 local lsp_kind = require("lspkind")
 
 lsp_kind.init(
     {
-        -- enables text annotations
-        --
-        -- default: true
-        with_text = true,
-        -- default symbol map
-        -- can be either 'default' (requires nerd-fonts font) or
-        -- 'codicons' for codicon preset (requires vscode-codicons font)
-        --
-        -- default: 'default'
+        mode = 'symbol_text',
         preset = "codicons"
     }
 )
@@ -44,46 +35,6 @@ lsp_saga.init_lsp_saga {
         quit = {"<esc>"},
         exec = "<CR>"
     }
-}
-
--- Lsp trouble config
-lsp_trouble.setup {
-    height = 10, -- height of the trouble list
-    icons = true, -- use devicons for filenames
-    mode = "lsp_workspace_diagnostics", -- "lsp_workspace_diagnostics", "lsp_document_diagnostics", "quickfix", "lsp_references", "loclist"
-    fold_open = "", -- icon used for open folds
-    fold_closed = "", -- icon used for closed folds
-    action_keys = {
-        -- key mappings for actions in the trouble list
-        close = "q", -- close the list
-        cancel = "<esc>", -- cancel the preview and get back to your last window / buffer / cursor
-        refresh = "r", -- manually refresh
-        jump = {"<cr>", "<tab>"}, -- jump to the diagnostic or open / close folds
-        jump_close = {"o"}, -- jump to the diagnostic and close the list
-        toggle_mode = "m", -- toggle between "workspace" and "document" diagnostics mode
-        toggle_preview = "P", -- toggle auto_preview
-        hover = "K", -- opens a small poup with the full multiline message
-        preview = "p", -- preview the diagnostic location
-        close_folds = {"zM", "zm"}, -- close all folds
-        open_folds = {"zR", "zr"}, -- open all folds
-        toggle_fold = {"zA", "za"}, -- toggle fold of current file
-        previous = "k", -- preview item
-        next = "j" -- next item
-    },
-    indent_lines = true, -- add an indent guide below the fold icons
-    auto_open = false, -- automatically open the list when you have diagnostics
-    auto_close = false, -- automatically close the list when you have no diagnostics
-    auto_preview = true, -- automatyically preview the location of the diagnostic. <esc> to close preview and go back to last window
-    auto_fold = false, -- automatically fold a file trouble list at creation
-    signs = {
-        -- icons / text used for a diagnostic
-        error = "",
-        warning = "",
-        hint = "",
-        information = "",
-        other = "﫠"
-    },
-    use_lsp_diagnostic_signs = false -- enabling this will use the signs defined in your lsp client
 }
 
 -- Python
@@ -159,36 +110,27 @@ require("rust-tools").setup(opts)
 --}
 
 -- Lua
-local sumneko_root_path = vim.fn.stdpath("cache") .. "/lspconfig/sumneko_lua/lua-language-server"
-local sumneko_binary = "lua-language-server"
-lsp_config.sumneko_lua.setup {
-    on_attach = lsp_status.on_attach,
-    capabilities = lsp_status.capabilities,
-    cmd = {
-        sumneko_binary,
-        "-E",
-        sumneko_root_path .. "/main.lua"
+require'lspconfig'.lua_ls.setup {
+  settings = {
+    Lua = {
+      runtime = {
+        -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+        version = 'LuaJIT',
+      },
+      diagnostics = {
+        -- Get the language server to recognize the `vim` global
+        globals = {'vim'},
+      },
+      workspace = {
+        -- Make the server aware of Neovim runtime files
+        library = vim.api.nvim_get_runtime_file("", true),
+      },
+      -- Do not send telemetry data containing a randomized but unique identifier
+      telemetry = {
+        enable = false,
+      },
     },
-    settings = {
-        Lua = {
-            telemetry = {
-                enable = false
-            },
-            diagnostics = {
-                globals = {
-                    "vim",
-                    "use"
-                }
-            },
-            workspace = {
-                library = {
-                    [vim.fn.expand("$VIMRUNTIME/lua")] = true,
-                    [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true
-                },
-                maxPreload = 10000
-            }
-        }
-    }
+  },
 }
 
 -- Scala
@@ -210,3 +152,6 @@ vim.cmd([[autocmd!]])
 vim.cmd([[autocmd FileType scala setlocal omnifunc=v:lua.vim.lsp.omnifunc]])
 vim.cmd([[autocmd FileType scala,sbt lua require("metals").initialize_or_attach(metals_config)]])
 vim.cmd([[augroup end]])
+
+-- Go
+require "lspconfig".gopls.setup {}

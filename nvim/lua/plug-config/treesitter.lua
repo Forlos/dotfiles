@@ -1,5 +1,7 @@
 local treesitter = require "nvim-treesitter.configs"
 
+require('orgmode').setup_ts_grammar()
+
 treesitter.setup {
     ensure_installed = "all",
     highlight = {

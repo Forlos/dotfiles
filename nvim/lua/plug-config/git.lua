@@ -4,9 +4,9 @@ neogit.setup {
     auto_refresh = true,
     integrations = {
         diffview = true
-    }
+    },
+    use_magit_keybindings = false,
 }
-neogit.config.use_magit_keybindings()
 
 require("gitsigns").setup {
     signs = {
@@ -19,9 +19,6 @@ require("gitsigns").setup {
     numhl = true,
     linehl = false,
     keymaps = {},
-    watch_index = {
-        interval = 1000
-    },
     current_line_blame = true,
     current_line_blame_opts = {
         virt_text = true,
@@ -35,6 +32,4 @@ require("gitsigns").setup {
     sign_priority = 1,
     update_debounce = 100,
     status_formatter = nil, -- Use default
-    use_decoration_api = true,
-    use_internal_diff = true -- If luajit is present
 }
