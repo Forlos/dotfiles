@@ -7,6 +7,9 @@ vim.api.nvim_set_option("timeoutlen", 500)
 vim.api.nvim_set_option("foldmethod", "manual")
 vim.api.nvim_set_option("hidden", true)
 
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
 -- https://github.com/nanotee/nvim-lua-guide/blob/master/README.md#caveats-3
 vim.bo.tabstop = 4
 vim.o.tabstop = 4
@@ -42,11 +45,12 @@ vim.g.nvim_tree_respect_buf_cwd = 1
 -- Custom filetypes
 nvim_create_augroups(
     {
-        kaitai_filetype = {" BufNewFile,BufRead *.ksy setf yaml"}
+        kaitai_filetype = { " BufNewFile,BufRead *.ksy setf yaml" }
     }
 )
 
 vim.g.coq_settings = {
-    ["display.preview.positions"] = {["north"] = 2, ["south"] = 3, ["west"] = 4, ["east"] = 1},
-    ["auto_start"] = true
+    ["display.preview.positions"] = { ["north"] = 2, ["south"] = 3, ["west"] = 4, ["east"] = 1 },
+    ["auto_start"] = true,
+    ["keymap.pre_select"] = true
 }

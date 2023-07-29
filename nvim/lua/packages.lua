@@ -3,26 +3,27 @@ vim.cmd [[packadd packer.nvim]]
 return require("packer").startup(
     function()
         -- Packer
-        use {"wbthomason/packer.nvim", opt = true}
+        use { "wbthomason/packer.nvim", opt = true }
 
         -- Syntax
-        use {"nvim-treesitter/nvim-treesitter", run = ":TSUpdate"}
-        use {"p00f/nvim-ts-rainbow"}
-        use {"nvim-treesitter/nvim-treesitter-refactor"}
+        use { "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" }
+        use { "p00f/nvim-ts-rainbow" }
+        use { "nvim-treesitter/nvim-treesitter-refactor" }
 
         -- Theme
+        use { "nvim-tree/nvim-web-devicons" }
         use {
             "hoob3rt/lualine.nvim",
-            requires = {"kyazdani42/nvim-web-devicons", opt = true}
+            requires = { "kyazdani42/nvim-web-devicons", opt = true }
         }
-        use {"folke/tokyonight.nvim"}
-        use {"kyazdani42/nvim-tree.lua", requires = {"kyazdani42/nvim-web-devicons"}}
-        use {"folke/todo-comments.nvim", requires = {"nvim-lua/plenary.nvim"}}
-        use {"glepnir/dashboard-nvim"}
+        use { "rebelot/kanagawa.nvim" }
+        use { "kyazdani42/nvim-tree.lua", requires = { "kyazdani42/nvim-web-devicons" } }
+        use { "folke/todo-comments.nvim", requires = { "nvim-lua/plenary.nvim" } }
+        use { "nvimdev/dashboard-nvim" }
 
         -- Lsp
-        use {"neovim/nvim-lspconfig"}
-        use {"nvim-lua/lsp-status.nvim"}
+        use { "neovim/nvim-lspconfig" }
+        use { "nvim-lua/lsp-status.nvim" }
         use {
             "simrat39/rust-tools.nvim",
             requires = {
@@ -30,16 +31,16 @@ return require("packer").startup(
                 "nvim-lua/plenary.nvim"
             }
         }
-        use {"kosayoda/nvim-lightbulb"}
-        use {"tami5/lspsaga.nvim"}
-        use {"onsails/lspkind-nvim"}
+        use { "kosayoda/nvim-lightbulb" }
+        use { "tami5/lspsaga.nvim" }
+        use { "onsails/lspkind-nvim" }
         use {
             "ahmedkhalf/project.nvim",
             config = function()
                 require("project_nvim").setup {}
             end
         }
-        use {"scalameta/nvim-metals"}
+        use { "scalameta/nvim-metals" }
 
         -- Completion
         --[[ use {
@@ -49,45 +50,45 @@ return require("packer").startup(
                 "hrsh7th/cmp-buffer"
             }
         } ]]
-        use {"ms-jpq/coq_nvim", branch = "coq"}
+        use { "ms-jpq/coq_nvim", branch = "coq", run = ":COQdeps" }
 
         -- Format
-        use {"lukas-reineke/lsp-format.nvim"}
-        use {"b3nj5m1n/kommentary"}
-        use {"jiangmiao/auto-pairs"}
+        use { "mhartington/formatter.nvim" }
+        use { "b3nj5m1n/kommentary" }
+        use { "jiangmiao/auto-pairs" }
 
         -- Geneal Tools
-        use {"tweekmonster/startuptime.vim"}
-        use {"folke/which-key.nvim"}
+        use { "tweekmonster/startuptime.vim" }
+        use { "folke/which-key.nvim" }
         use {
             "nvim-telescope/telescope.nvim",
-            requires = {{"nvim-lua/popup.nvim"}, {"nvim-lua/plenary.nvim"}}
+            tag = "0.1.2",
+            requires = { { "nvim-lua/popup.nvim" }, { "nvim-lua/plenary.nvim" } }
         }
-        use {"nvim-telescope/telescope-media-files.nvim"}
+        use { "nvim-telescope/telescope-media-files.nvim" }
         use {
             "sudormrfbin/cheatsheet.nvim",
             requires = {
-                {"nvim-telescope/telescope.nvim"},
-                {"nvim-lua/popup.nvim"},
-                {"nvim-lua/plenary.nvim"}
+                { "nvim-lua/popup.nvim" },
+                { "nvim-lua/plenary.nvim" }
             }
         }
 
         -- Git
-        use {"lewis6991/gitsigns.nvim", requires = {"nvim-lua/plenary.nvim"}}
-        use {"TimUntersberger/neogit", requires = {"nvim-lua/plenary.nvim", "sindrets/diffview.nvim"}}
+        use { "lewis6991/gitsigns.nvim", requires = { "nvim-lua/plenary.nvim" } }
+        use { "NeogitOrg/neogit", requires = { "nvim-lua/plenary.nvim", "sindrets/diffview.nvim" } }
 
         -- Utils
-        use {"norcalli/nvim_utils"}
-        use {"famiu/nvim-reload"}
+        use { "norcalli/nvim_utils" }
+        use { "famiu/nvim-reload" }
         use {
             "folke/zen-mode.nvim",
             config = function()
                 require("zen-mode").setup {}
             end
         }
-        use {"akinsho/nvim-toggleterm.lua"}
-        use {"famiu/bufdelete.nvim"}
+        use { "akinsho/toggleterm.nvim" }
+        use { "famiu/bufdelete.nvim" }
         use {
             "luukvbaal/stabilize.nvim",
             config = function()
@@ -107,7 +108,7 @@ return require("packer").startup(
             "kristijanhusak/orgmode.nvim",
             config = function()
                 require("orgmode").setup {}
-                require('orgmode').setup_ts_grammar()
+                require("orgmode").setup_ts_grammar()
             end
         }
 

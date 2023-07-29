@@ -3,15 +3,9 @@ local tree_cb = require "nvim-tree.config".nvim_tree_callback
 require "nvim-tree".setup {
     disable_netrw = true,
     hijack_netrw = true,
-    open_on_setup = false,
-    ignore_ft_on_setup = {},
     open_on_tab = false,
     hijack_cursor = false,
     update_cwd = false,
-    update_to_buf_dir = {
-        enable = true,
-        auto_open = true
-    },
     diagnostics = {
         enable = true,
         icons = {
@@ -32,31 +26,25 @@ require "nvim-tree".setup {
     },
     filters = {
         dotfiles = false,
-        custom = {".git"}
+        custom = { ".git" }
     },
     view = {
         width = 40,
-        height = 30,
         hide_root_folder = false,
-        side = "left",
-        auto_resize = false,
-        mappings = {
-            custom_only = false,
-            list = {
-                {key = {"<CR>"}, cb = tree_cb("edit")},
-                {key = {"<C-}>"}, cb = tree_cb("cd")},
-                {key = {"m"}, cb = tree_cb("cd")},
-                {key = {"<Tab>"}, cb = tree_cb("toggle_node")},
-                {key = {"I"}, cb = tree_cb("toggle_ignored")},
-                {key = {"H"}, cb = tree_cb("toggle_dotfiles")},
-                {key = {"R"}, cb = tree_cb("refresh")},
-                {key = {"c"}, cb = tree_cb("create")},
-                {key = {"d"}, cb = tree_cb("remove")},
-                {key = {"r"}, cb = tree_cb("rename")},
-                {key = {"<C-r>"}, cb = tree_cb("full_rename")},
-                {key = {"-"}, cb = tree_cb("dir_up")},
-                {key = {"q"}, cb = tree_cb("close")}
-            }
-        }
-    }
+        side = "left"
+    },
+    on_attach = function(bufnr)
+        local api = require "nvim-tree.api"
+
+        local function opts(desc)
+            return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
+        end
+
+        -- default mappings
+        api.config.mappings.default_on_attach(bufnr)
+
+        -- custom mappings
+        vim.keymap.set("n", "<C-t>", api.tree.change_root_to_parent, opts("Up"))
+        vim.keymap.set("n", "?", api.tree.toggle_help, opts("Help"))
+    end
 }

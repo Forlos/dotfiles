@@ -1,10 +1,40 @@
 local lualine = require "lualine"
 local lspstatus = require "lsp-status"
 
--- Theme configuration
-vim.g.tokyonight_style = "storm"
+require("kanagawa").setup(
+    {
+        compile = false,
+        undercurl = true,
+        commentStyle = { italic = true },
+        functionStyle = {},
+        keywordStyle = { italic = true },
+        statementStyle = { bold = true },
+        typeStyle = {},
+        transparent = false,
+        dimInactive = false,
+        terminalColors = true,
+        colors = {
+            palette = {},
+            colors = {
+                theme = {
+                    all = {
+                        ui = {
+                            bg_gutter = "none"
+                        }
+                    }
+                }
+            }
+        },
+        theme = "wave",
+        background = {
+            dark = "wave",
+            light = "lotus"
+        }
+    }
+)
 
-vim.cmd [[colorscheme tokyonight]]
+-- setup must be called before loading
+vim.cmd("colorscheme kanagawa-wave")
 
 -- Color table for highlights
 local colors = {
@@ -71,7 +101,7 @@ local config = {
         --     normal = {c = {fg = colors.fg, bg = colors.bg}},
         --     inactive = {c = {fg = colors.fg, bg = colors.bg}}
         -- }
-        theme = "tokyonight"
+        theme = "kanagawa"
     },
     sections = {
         -- these are to remove the defaults
@@ -108,7 +138,7 @@ ins_left {
     function()
         return "▊"
     end,
-    color = {fg = colors.blue},
+    color = { fg = colors.blue },
     left_padding = 0
 }
 
@@ -132,7 +162,7 @@ ins_left {
             if size <= 0 then
                 return ""
             end
-            local sufixes = {"b", "k", "m", "g"}
+            local sufixes = { "b", "k", "m", "g" }
             local i = 1
             while size > 1024 do
                 size = size / 1024
@@ -152,14 +182,14 @@ ins_left {
 ins_left {
     "filename",
     condition = conditions.buffer_not_empty,
-    color = {fg = colors.magenta, gui = "bold"}
+    color = { fg = colors.magenta, gui = "bold" }
 }
 
-ins_left {"location"}
+ins_left { "location" }
 
 ins_left {
     "progress",
-    color = {fg = colors.fg, gui = "bold"}
+    color = { fg = colors.fg, gui = "bold" }
 }
 
 ins_left {
@@ -170,8 +200,8 @@ ins_left {
 
 ins_right {
     "diagnostics",
-    sources = {"nvim_lsp"},
-    symbols = {error = " ", warn = " ", info = " "},
+    sources = { "nvim_lsp" },
+    symbols = { error = " ", warn = " ", info = " " },
     color_error = colors.red,
     color_warn = colors.yellow,
     color_info = colors.green
@@ -195,7 +225,7 @@ ins_right {
         return msg
     end,
     icon = " LSP:",
-    color = {fg = colors.cyan, gui = "bold"}
+    color = { fg = colors.cyan, gui = "bold" }
 }
 
 ins_right {
@@ -212,7 +242,7 @@ ins_right {
     "branch",
     icon = "",
     condition = conditions.check_git_workspace,
-    color = {fg = colors.violet, gui = "bold"}
+    color = { fg = colors.violet, gui = "bold" }
 }
 
 -- Add components to right sections
@@ -220,18 +250,18 @@ ins_right {
     "o:encoding",
     upper = true,
     condition = conditions.hide_in_width,
-    color = {fg = colors.green, gui = "bold"}
+    color = { fg = colors.green, gui = "bold" }
 }
 
 ins_right {
     "filetype",
     condition = conditions.buffer_not_empty,
-    color = {fg = colors.magenta, gui = "bold"}
+    color = { fg = colors.magenta, gui = "bold" }
 }
 
 ins_right {
     "diff",
-    symbols = {added = " ", modified = "柳", removed = " "},
+    symbols = { added = " ", modified = " ", removed = " " },
     color_added = colors.green,
     color_modified = colors.orange,
     color_removed = colors.red,
@@ -242,7 +272,7 @@ ins_right {
     function()
         return "▊"
     end,
-    color = {fg = colors.blue},
+    color = { fg = colors.blue },
     right_padding = 0
 }
 

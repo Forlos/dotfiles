@@ -47,5 +47,6 @@
         "/usr/share/vim/vimfiles",
         "${3rd}/luv/library",
         "${3rd}/luassert/library"
-    ]
+    ],
+    "workspace.checkThirdParty": false
 }

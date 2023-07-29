@@ -5,9 +5,31 @@ local lsp_status = require("lsp-status")
 local lsp_saga = require "lspsaga"
 local lsp_kind = require("lspkind")
 
+local diagnostics = {
+    virtual_text = {
+        spacing = 4,
+        source = "if_many",
+        prefix = "●"
+    },
+    virtual_lines = true,
+    update_in_insert = true,
+    underline = true,
+    severity_sort = true,
+    float = {
+        focusable = false,
+        style = "minimal",
+        border = "rounded",
+        source = "always",
+        header = "",
+        prefix = ""
+    }
+}
+
+vim.diagnostic.config(diagnostics)
+
 lsp_kind.init(
     {
-        mode = 'symbol_text',
+        mode = "symbol_text",
         preset = "codicons"
     }
 )
@@ -15,7 +37,7 @@ lsp_status.register_progress()
 
 nvim_create_augroups(
     {
-        Lightbulb = {"CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()"}
+        Lightbulb = { "CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()" }
     }
 )
 
@@ -28,11 +50,11 @@ lsp_saga.init_lsp_saga {
     hint_sign = "",
     infor_sign = "",
     code_action_keys = {
-        quit = {"q", "<esc>"},
+        quit = { "q", "<esc>" },
         exec = "<CR>"
     },
     rename_action_keys = {
-        quit = {"<esc>"},
+        quit = { "<esc>" },
         exec = "<CR>"
     }
 }
@@ -52,85 +74,56 @@ lsp_config.pyright.setup {
 }
 
 -- Rust
-local opts = {
-    tools = {
-        -- rust-tools options
-        -- automatically set inlay hints (type hints)
-        -- There is an issue due to which the hints are not applied on the first
-        -- opened file. For now, write to the file to trigger a reapplication of
-        -- the hints or just run :RustSetInlayHints.
-        -- default: true
-        autoSetHints = true,
-        -- whether to show hover actions inside the hover window
-        -- this overrides the default hover handler so something like lspsaga.nvim's hover would be overriden by this
-        -- default: true
-        hover_with_actions = false,
-        -- All opts that go into inlay hints (scroll down a bit) can also go here,
-        -- these apply to the default RustSetInlayHints command
-        inlay_hints = {
-            -- wheter to show parameter hints with the inlay hints or not
-            -- default: true
-            show_parameter_hints = false,
-            -- prefix for parameter hints
-            -- default: "<-"
-            parameter_hints_prefix = "<-",
-            -- prefix for all the other hints (type, chaining)
-            -- default: "=>"
-            other_hints_prefix = "=> "
+require("rust-tools").setup(
+    {
+        tools = {
+            runnables = {
+                use_telescope = true
+            },
+            inlay_hints = { auto = true, show_parameter_hints = true, locationLinks = false },
+            hover_actions = { auto_focus = true }
         },
-        hover_actions = {
-            -- the border that is used for the hover window
-            -- see vim.api.nvim_open_win()
-            border = {
-                {"╭", "FloatBorder"},
-                {"─", "FloatBorder"},
-                {"╮", "FloatBorder"},
-                {"│", "FloatBorder"},
-                {"╯", "FloatBorder"},
-                {"─", "FloatBorder"},
-                {"╰", "FloatBorder"},
-                {"│", "FloatBorder"}
+        ["rust-analyzer"] = {
+            inlayHints = { auto = true, show_parameter_hints = true },
+            lens = {
+                enable = true
+            },
+            checkonsave = {
+                command = "clippy"
+            },
+            procMacros = {
+                enabled = true
             }
         }
-    },
-    -- all the opts to send to nvim-lspconfig
-    -- these override the defaults set by rust-tools.nvim
-    -- see https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#rust_analyzer
-    --
-    server = {
-        on_attach = lsp_status.on_attach,
-        capabilities = lsp_status.capabilities
     }
-}
-
-require("rust-tools").setup(opts)
+)
 --lspconfig.rust_analyzer.setup {
 --    on_attach = lsp_status.on_attach,
 --    capabilities = lsp_status.capabilities
 --}
 
 -- Lua
-require'lspconfig'.lua_ls.setup {
-  settings = {
-    Lua = {
-      runtime = {
-        -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-        version = 'LuaJIT',
-      },
-      diagnostics = {
-        -- Get the language server to recognize the `vim` global
-        globals = {'vim'},
-      },
-      workspace = {
-        -- Make the server aware of Neovim runtime files
-        library = vim.api.nvim_get_runtime_file("", true),
-      },
-      -- Do not send telemetry data containing a randomized but unique identifier
-      telemetry = {
-        enable = false,
-      },
-    },
-  },
+require "lspconfig".lua_ls.setup {
+    settings = {
+        Lua = {
+            runtime = {
+                -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+                version = "LuaJIT"
+            },
+            diagnostics = {
+                -- Get the language server to recognize the `vim` global
+                globals = { "vim" }
+            },
+            workspace = {
+                -- Make the server aware of Neovim runtime files
+                library = vim.api.nvim_get_runtime_file("", true)
+            },
+            -- Do not send telemetry data containing a randomized but unique identifier
+            telemetry = {
+                enable = false
+            }
+        }
+    }
 }
 
 -- Scala

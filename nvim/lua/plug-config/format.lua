@@ -1,43 +1,34 @@
 require("nvim_utils")
 
---[[ -- Formating on save
+-- Formating on save
 nvim_create_augroups(
     {
-        Format = {"BufWritePost * FormatWrite"},
-        LspFormat = {"BufWritePre * lua vim.lsp.buf.formatting_sync(nil, 1000)"}
+        FormatAutogroup = { "BufWritePost * FormatWriteLock" },
+        LspFormat = { "BufWritePre * lua vim.lsp.buf.format()" }
     }
-) ]]
+)
 
--- Define what files to format on save
-require "lsp-format".setup {
-    ["*"] = {
-        {cmd = {"sed -i 's/[ \t]*$//'"}} -- remove trailing whitespace
-    },
-    vim = {
-        {
-            cmd = {"luafmt -w replace"},
-            start_pattern = "^lua << EOF$",
-            end_pattern = "^EOF$"
-        }
-    },
-    lua = {
-        {
-            cmd = {
-                function(file)
-                    return string.format("luafmt -w replace %s", file)
-                end
+-- Provides the Format, FormatWrite, FormatLock, and FormatWriteLock commands
+require("formatter").setup {
+    logging = true,
+    log_level = vim.log.levels.WARN,
+    filetype = {
+        lua = {
+            require("formatter.filetypes.lua").luafmt()
+        },
+        go = {
+            require("formatter.filetypes.go").gofmt(),
+            require("formatter.filetypes.go").goimports()
+        },
+        python = {
+            require("formatter.filetypes.python").black()
+        },
+        ["*"] = {
+            {
+                exe = "sed",
+                args = { "'s/[ \t]*$//'" },
+                stdin = true
             }
-        }
-    },
-    go = {
-        {
-            cmd = {"gofmt -w", "goimports -w"},
-            tempfile_postfix = ".tmp"
-        }
-    },
-    python = {
-        {
-            cmd = {"black"}
         }
     }
 }
