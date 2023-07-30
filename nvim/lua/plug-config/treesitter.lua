@@ -5,7 +5,8 @@ require("orgmode").setup_ts_grammar()
 treesitter.setup {
     ensure_installed = "all",
     highlight = {
-        enable = true
+        enable = true,
+        additional_vim_regex_highlighting = false
     },
     indent = {
         enable = true

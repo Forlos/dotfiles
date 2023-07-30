@@ -1,6 +1,10 @@
 local lualine = require "lualine"
 local lspstatus = require "lsp-status"
 
+require("indent_blankline").setup {
+    show_current_context = true
+}
+
 require("kanagawa").setup(
     {
         compile = false,

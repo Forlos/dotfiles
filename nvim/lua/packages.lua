@@ -17,6 +17,8 @@ return require("packer").startup(
             requires = { "kyazdani42/nvim-web-devicons", opt = true }
         }
         use { "rebelot/kanagawa.nvim" }
+        use { "danilamihailov/beacon.nvim" }
+        use { "lukas-reineke/indent-blankline.nvim" }
         use { "kyazdani42/nvim-tree.lua", requires = { "kyazdani42/nvim-web-devicons" } }
         use { "folke/todo-comments.nvim", requires = { "nvim-lua/plenary.nvim" } }
         use { "nvimdev/dashboard-nvim" }
