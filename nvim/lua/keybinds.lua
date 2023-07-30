@@ -7,6 +7,12 @@ vim.api.nvim_set_keymap("n", "<Leader>wd", "<Cmd>:q<CR>", { noremap = true })
 vim.api.nvim_set_keymap("n", "<Leader>w/", "<Cmd>:vsplit<CR>", { noremap = true })
 vim.api.nvim_set_keymap("n", "<Leader>w-", "<Cmd>:split<CR>", { noremap = true })
 
+-- Tab manipulation
+vim.api.nvim_set_keymap("n", "<Leader>td", "<Cmd>:tabclose<CR>", { noremap = true })
+
+vim.api.nvim_set_keymap("n", "<Leader>t<Left>", "<Cmd>:tabnext<CR>", { noremap = true })
+vim.api.nvim_set_keymap("n", "<Leader>t<Right>", "<Cmd>:tabprevious<CR>", { noremap = true })
+
 -- Files
 vim.api.nvim_set_keymap("n", "<Leader>fs", "<Cmd>:w<CR>", { noremap = true })
 vim.api.nvim_set_keymap("n", "<Leader>fS", ":w ", { noremap = true })
