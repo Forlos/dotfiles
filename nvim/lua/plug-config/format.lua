@@ -23,6 +23,12 @@ require("formatter").setup {
         python = {
             require("formatter.filetypes.python").black()
         },
+        typescript = {
+            require("formatter.filetypes.typescript").prettier()
+        },
+        typescriptreact = {
+            require("formatter.filetypes.typescriptreact").prettier()
+        },
         ["*"] = {
             {
                 exe = "sed",

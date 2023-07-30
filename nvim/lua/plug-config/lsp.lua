@@ -148,3 +148,26 @@ vim.cmd([[augroup end]])
 
 -- Go
 require "lspconfig".gopls.setup {}
+
+-- Typescript
+require("typescript").setup(
+    {
+        server = {
+            on_attach = lsp_status.on_attach,
+            capabilities = lsp_status.capabilities,
+            settings = {
+                typescript = {
+                    inlayHints = {
+                        includeInlayEnumMemberValueHints = true,
+                        includeInlayFunctionLikeReturnTypeHints = true,
+                        includeInlayFunctionParameterTypeHints = true,
+                        includeInlayParameterNameHints = "all", -- 'none' | 'literals' | 'all';
+                        includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+                        includeInlayPropertyDeclarationTypeHints = true,
+                        includeInlayVariableTypeHints = true
+                    }
+                }
+            }
+        }
+    }
+)

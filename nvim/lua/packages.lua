@@ -40,6 +40,7 @@ return require("packer").startup(
                 require("project_nvim").setup {}
             end
         }
+        use { "jose-elias-alvarez/typescript.nvim" }
         use { "scalameta/nvim-metals" }
 
         -- Completion
